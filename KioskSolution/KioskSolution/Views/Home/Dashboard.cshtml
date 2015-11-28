@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page heading -->
+<div class="page-head">
+    <h2 class="pull-left"><i class="fa fa-tachometer"></i> Dashboard</h2>
+
+    <!-- Breadcrumb -->
+    <div class="bread-crumb pull-right">
+        <a href="~/AdminHome/Dashboard"><i class="fa fa-tachometer"></i> Home</a>
+        <!-- Divider -->
+        <span class="divider">/</span>
+        <a href="~/AdminHome/Dashboard" class="bread-current"> Dashboard</a>
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>
+<div class="matter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-folder fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div>Property</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">
+                                <a href="~/Property/UploadProperty" style="font-size:12px">Upload | </a>
+                                <a href="~/Property/ViewProperty" style="font-size:12px">View |</a>
+                            </span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-book fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div>E-Mail Templates</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">
+                                <a href="~/MailTemplate/MailTemplate" style="font-size:12px">View | </a>
+                            </span>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-pencil-square-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div>Password Management</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">
+                                <a href="~/Password/ChangePassword" style="font-size:12px">Change | </a>
+                            </span>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
