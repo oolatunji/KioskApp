@@ -43,7 +43,7 @@ function addBranch() {
                 async: true,
                 cache: false,
                 success: function (response) {
-                    displayMessage("success", response, "Branch Management");
+                    displayMessage("success", response);
                     $('#branchName').val('');
                     $('#branchCode').val('');
                     $('#branchAddress').val('');

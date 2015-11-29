@@ -30,7 +30,7 @@ namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary
         public virtual DbSet<RoleFunction> RoleFunctions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<CardRequest> CardRequests { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CardRequest> CardRequests { get; set; }
     }
 }

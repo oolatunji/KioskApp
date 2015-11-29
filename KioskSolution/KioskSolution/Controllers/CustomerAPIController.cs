@@ -1,4 +1,5 @@
-﻿using KioskSolutionLibrary.ModelLibrary;
+﻿using KioskSolution.Models;
+using KioskSolutionLibrary.ModelLibrary;
 using KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary;
 using KioskSolutionLibrary.ProcessLibrary;
 using System;
@@ -71,6 +72,50 @@ namespace KioskSolution.Controllers
                 ErrorHandler.WriteError(ex);
                 var response = Request.CreateResponse(HttpStatusCode.BadRequest);
                 response.ReasonPhrase = ex.Message;
+                return response;
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage SentTokenToCustomer([FromBody]TokenModel tokenRequest)
+        {
+            try
+            {
+                dynamic returnedCustomer = CustomerPL.SendTokenToCustomer(tokenRequest.AccountNumber, tokenRequest.SerialNumber);
+                object customerToken = new { data = returnedCustomer };
+                return Request.CreateResponse(HttpStatusCode.OK, customerToken);
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex);
+                var response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                response.ReasonPhrase = ex.Message;
+                return response;
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage SaveCustomerCardRequest([FromBody]CardRequestModel cardRequestModel)
+        {
+            try
+            {
+                CardRequest cardRequest = new CardRequest();
+                cardRequest.CustomerID = cardRequestModel.CustomerID;
+                cardRequest.CardType = Enum.GetName(typeof(StatusUtil.CardType), cardRequestModel.CardTypeID);
+                cardRequest.RequestType = Enum.GetName(typeof(StatusUtil.RequestType), cardRequestModel.RequestTypeID);
+                cardRequest.PickupBranchID = cardRequestModel.PickupBranchID;
+                cardRequest.Status = StatusUtil.CardStatus.Requested.ToString();
+                cardRequest.ModifiedDate = System.DateTime.Now;
+                cardRequest.SerialNumber = cardRequestModel.SerialNumber;
+
+                bool result = CustomerPL.SaveCardRequest(cardRequest);
+
+                return result.Equals(true) ? Request.CreateResponse(HttpStatusCode.OK, "Successful") : Request.CreateResponse(HttpStatusCode.BadRequest, "Request failed");
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex);
+                var response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
                 return response;
             }
         }

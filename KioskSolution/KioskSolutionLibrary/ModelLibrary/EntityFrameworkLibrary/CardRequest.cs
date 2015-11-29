@@ -20,7 +20,10 @@ namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary
         public long PickupBranchID { get; set; }
         public string RequestType { get; set; }
         public string Status { get; set; }
-        public string ModifiedDate { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public string HashedPan { get; set; }
+        public string EncryptedPan { get; set; }
+        public string SerialNumber { get; set; }
     
         public virtual Branch Branch { get; set; }
         public virtual Customer Customer { get; set; }

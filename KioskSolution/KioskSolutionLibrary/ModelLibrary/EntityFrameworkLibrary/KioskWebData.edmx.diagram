@@ -14,11 +14,11 @@
         <AssociationConnector Association="KioskWebDB.FK_RoleFunctions_RoleFunctions" />
         <AssociationConnector Association="KioskWebDB.FK_RoleFunctions_Roles" />
         <AssociationConnector Association="KioskWebDB.FK_Users_Roles" />
-        <EntityTypeShape EntityType="KioskWebDB.CardRequest" Width="1.5" PointX="6" PointY="0.75" />
         <EntityTypeShape EntityType="KioskWebDB.Customer" Width="1.5" PointX="3.75" PointY="9.25" />
+        <EntityTypeShape EntityType="KioskWebDB.CardRequest" Width="1.5" PointX="6" PointY="8" />
         <AssociationConnector Association="KioskWebDB.FK_CardRequest_Branch" />
         <AssociationConnector Association="KioskWebDB.FK_CardRequest_Customer" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

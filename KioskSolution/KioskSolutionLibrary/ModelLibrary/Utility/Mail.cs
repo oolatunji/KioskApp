@@ -91,6 +91,66 @@ namespace KioskSolutionLibrary.ModelLibrary
 
         }
 
+        public static void SendCardRequest(Customer customer, string token)
+        {
+            try
+            {
+
+                string userFullName = customer.Lastname + " " + customer.Othernames;
+                string organization = System.Configuration.ConfigurationManager.AppSettings.Get("Organization");
+                string applicationName = System.Configuration.ConfigurationManager.AppSettings.Get("ApplicationName");
+                string subject = "Welcome to " + applicationName;
+                string fromAddress = "";
+                string smtpUsername = "";
+                string smtpPassword = "";
+                string smtpHost = "";
+                Int32 smtpPort = 587;
+                bool smtpUseDefaultCredentials = false;
+                bool smtpEnableSsl = true;
+
+                MailHelper mailConfig = ConfigurationManager.GetSection("mailHelperSection") as MailHelper;
+                if (mailConfig != null && mailConfig.Mail != null)
+                {
+                    fromAddress = mailConfig.Mail.FromEmailAddress;
+                    smtpUsername = mailConfig.Mail.Username;
+                    smtpPassword = mailConfig.Mail.Password;
+                }
+
+                if (mailConfig != null && mailConfig.Smtp != null)
+                {
+                    smtpHost = mailConfig.Smtp.Host;
+                    smtpPort = Convert.ToInt32(mailConfig.Smtp.Port);
+                    smtpUseDefaultCredentials = Convert.ToBoolean(mailConfig.Smtp.UseDefaultCredentials);
+                    smtpEnableSsl = Convert.ToBoolean(mailConfig.Smtp.EnableSsl);
+                }
+
+
+                string body = "";
+
+                body = System.IO.File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/MailTemplates/CardRequest.txt"));
+                body = body.Replace("#Organization", organization);
+                body = body.Replace("#ApplicationName", applicationName);
+                body = body.Replace("#UserFullName", userFullName);
+                body = body.Replace("#Token", token);
+
+                Thread email = new Thread(delegate()
+                {
+                    Mail.SendMail(customer.EmailAddress, fromAddress, subject, body, smtpHost, smtpPort, smtpUseDefaultCredentials, smtpUsername, smtpPassword, smtpEnableSsl);
+
+                });
+
+                email.IsBackground = true;
+                email.Start();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex);
+                throw ex;
+            }
+
+        }
+
         public static void SendForgotPasswordMail(User user)
         {
             try

@@ -13,5 +13,24 @@ namespace KioskSolutionLibrary.ModelLibrary
             Active,
             InActive
         }
+
+        public enum RequestType
+        {
+            WithSerialNumber = 1,
+            WithoutSerialNumber
+        }
+
+        public enum CardType
+        {
+            MasterCard = 1,
+            Verve
+        }
+
+        public enum CardStatus
+        {
+            Requested = 1,
+            Approved,
+            Printed
+        }
     }
 }

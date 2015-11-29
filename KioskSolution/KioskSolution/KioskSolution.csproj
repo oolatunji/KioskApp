@@ -184,11 +184,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CardRequestModel.cs" />
     <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\SystemModel.cs" />
+    <Compile Include="Models\TokenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\MailTemplates\CardRequest.txt" />
     <Content Include="App_Data\MailTemplates\ForgotPassword.txt" />
     <Content Include="App_Data\MailTemplates\mail.png" />
     <Content Include="App_Data\MailTemplates\NewUser.txt" />
@@ -435,6 +438,8 @@
     <Content Include="Scripts\charts.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\Customer\AddCustomer.js" />
+    <Content Include="Scripts\Customer\CardRequest.js" />
+    <Content Include="Scripts\Customer\ConfirmToken.js" />
     <Content Include="Scripts\Customer\ViewCustomer.js" />
     <Content Include="Scripts\dataTables.tableTools.js" />
     <Content Include="Scripts\default.js" />
@@ -525,6 +530,8 @@
     <Content Include="Views\Customer\AddCustomer.cshtml" />
     <Content Include="Views\Customer\ViewCustomer.cshtml" />
     <Content Include="Views\Customer\CustomerCardRequest.cshtml" />
+    <Content Include="Views\Customer\CustomerCardRequestReport.cshtml" />
+    <Content Include="Views\Customer\ConfirmToken.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KioskSolutionLibrary\KioskSolutionLibrary.csproj">

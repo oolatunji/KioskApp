@@ -24,7 +24,10 @@
           <Property Name="PickupBranchID" Type="bigint" Nullable="false" />
           <Property Name="RequestType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="HashedPan" Type="nvarchar" MaxLength="50" />
+          <Property Name="EncryptedPan" Type="nvarchar" MaxLength="50" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -210,8 +213,8 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="CardRequests" EntityType="KioskWebDB.CardRequest" />
           <EntitySet Name="Customers" EntityType="KioskWebDB.Customer" />
+          <EntitySet Name="CardRequests" EntityType="KioskWebDB.CardRequest" />
           <AssociationSet Name="FK_CardRequest_Branch" Association="KioskWebDB.FK_CardRequest_Branch">
             <End Role="Branch" EntitySet="Branches" />
             <End Role="CardRequest" EntitySet="CardRequests" />
@@ -220,7 +223,7 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="CardRequest" EntitySet="CardRequests" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Branch">
           <Key>
             <PropertyRef Name="ID" />
@@ -329,20 +332,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CardRequest">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerID" Type="Int64" Nullable="false" />
-          <Property Name="CardType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PickupBranchID" Type="Int64" Nullable="false" />
-          <Property Name="RequestType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Branch" Relationship="KioskWebDB.FK_CardRequest_Branch" FromRole="CardRequest" ToRole="Branch" />
-          <NavigationProperty Name="Customer" Relationship="KioskWebDB.FK_CardRequest_Customer" FromRole="CardRequest" ToRole="Customer" />
-        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="ID" />
@@ -354,6 +343,23 @@
           <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CardRequests" Relationship="KioskWebDB.FK_CardRequest_Customer" FromRole="Customer" ToRole="CardRequest" />
+        </EntityType>
+        <EntityType Name="CardRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+          <Property Name="CardType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PickupBranchID" Type="Int64" Nullable="false" />
+          <Property Name="RequestType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HashedPan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EncryptedPan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Branch" Relationship="KioskWebDB.FK_CardRequest_Branch" FromRole="CardRequest" ToRole="Branch" />
+          <NavigationProperty Name="Customer" Relationship="KioskWebDB.FK_CardRequest_Customer" FromRole="CardRequest" ToRole="Customer" />
         </EntityType>
         <Association Name="FK_CardRequest_Branch">
           <End Type="KioskWebDB.Branch" Role="Branch" Multiplicity="1" />
@@ -379,7 +385,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -441,19 +447,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CardRequests">
-            <EntityTypeMapping TypeName="KioskWebDB.CardRequest">
-              <MappingFragment StoreEntitySet="CardRequest">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="RequestType" ColumnName="RequestType" />
-                <ScalarProperty Name="PickupBranchID" ColumnName="PickupBranchID" />
-                <ScalarProperty Name="CardType" ColumnName="CardType" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="KioskWebDB.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -462,6 +455,22 @@
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
                 <ScalarProperty Name="Othernames" ColumnName="Othernames" />
                 <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardRequests">
+            <EntityTypeMapping TypeName="KioskWebDB.CardRequest">
+              <MappingFragment StoreEntitySet="CardRequest">
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="EncryptedPan" ColumnName="EncryptedPan" />
+                <ScalarProperty Name="HashedPan" ColumnName="HashedPan" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RequestType" ColumnName="RequestType" />
+                <ScalarProperty Name="PickupBranchID" ColumnName="PickupBranchID" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

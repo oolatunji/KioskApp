@@ -32,6 +32,23 @@ namespace KioskSolutionLibrary.DataLibrary
             }
         }
 
+        public static bool SaveCardRequest(CardRequest cardRequest)
+        {
+            try
+            {
+                using (var context = new KioskWebDBEntities())
+                {
+                    context.CardRequests.Add(cardRequest);
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static bool CustomerExists(Customer customer)
         {
             try
@@ -45,6 +62,29 @@ namespace KioskSolutionLibrary.DataLibrary
                 }
 
                 if (existingCustomer == null)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static bool CustomerCardRequestExists(string serialNumber)
+        {
+            try
+            {
+                var existingCardRequest = new CardRequest();
+                using (var context = new KioskWebDBEntities())
+                {
+                    existingCardRequest = context.CardRequests
+                                    .Where(t => t.SerialNumber.Equals(serialNumber))
+                                    .FirstOrDefault();
+                }
+
+                if (existingCardRequest == null)
                     return false;
                 else
                     return true;
@@ -81,6 +121,24 @@ namespace KioskSolutionLibrary.DataLibrary
                 {
                     var customers = context.Customers
                                             .Where(f => f.ID == customerID);
+
+                    return customers.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static Customer RetrieveCustomerByAccountNumber(string accountNumber)
+        {
+            try
+            {
+                using (var context = new KioskWebDBEntities())
+                {
+                    var customers = context.Customers
+                                            .Where(f => f.AccountNumber == accountNumber);
 
                     return customers.FirstOrDefault();
                 }

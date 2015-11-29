@@ -26,5 +26,17 @@ namespace KioskSolution.Controllers
             ViewBag.Title = "Customer Card Request";
             return View();
         }
+
+        public ActionResult ConfirmToken()
+        {
+            ViewBag.Title = "Confirm Token";
+            return View();
+        }
+
+        public ActionResult CustomerCardRequestReport()
+        {
+            ViewBag.Title = "Customer Card Request Report";
+            return View();
+        }
     }
 }

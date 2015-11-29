@@ -19,7 +19,10 @@
     <Property Name="PickupBranchID" Type="bigint" Nullable="false" />
     <Property Name="RequestType" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="HashedPan" Type="nvarchar" MaxLength="50" />
+    <Property Name="EncryptedPan" Type="nvarchar" MaxLength="50" />
+    <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>

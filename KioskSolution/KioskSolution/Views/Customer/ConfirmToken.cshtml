@@ -11,7 +11,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/common_libraries")
-    @Scripts.Render("~/bundles/customercardrequest")
+    @Scripts.Render("~/bundles/confirmcardrequest")
 </head>
 <body>
 
@@ -25,7 +25,7 @@
                     <div class="widget worange">
                         <!-- Widget head -->
                         <div class="widget-head">
-                            <i class="fa fa-credit-card"></i> Request for Debit Card
+                            <i class="fa fa-credit-card"></i> Confirm Token
                         </div>
 
                         <div class="widget-content">
@@ -34,37 +34,41 @@
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Request Type</label>
                                         <div class="col-lg-9">
-                                            <select class="form-control" id="requestType" title="Request Type" required onchange="requestTypeOnChanged()">
-                                                <option value="">Select Request Type</option>
-                                                <option value="1">With Serial Number</option>
-                                                <option value="2">Without Serial Number</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="requestType" readonly>
                                         </div>
                                     </div>
-                                    <div class="form-group hideControl" id="cardTypeBlock">
+                                    <div class="form-group">
                                         <label class="col-lg-3 control-label">Card Type</label>
                                         <div class="col-lg-9">
-                                            <select class="form-control" id="cardType" title="Card Type" required>
-                                                <option value="">Select Card Type</option>
-                                                <option value="1">MasterCard</option>
-                                                <option value="2">Verve</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="cardType" readonly>
                                         </div>
                                     </div>
-                                    <div class="form-group hideControl" id="accountBlock">
+                                    <div class="form-group">
                                         <label class="control-label col-lg-3" for="username">Account Number</label>
                                         <div class="col-lg-9">
-                                            <input type="number" class="form-control" id="accountNumber" placeholder="Enter your account number" title="Account Number">
+                                            <input type="text" class="form-control" id="accountNumber" readonly>
                                         </div>
                                     </div>
-                                    <div class="form-group hideControl" id="serialNumberBlock">
+                                    <div class="form-group" id="serialNumberBlock">
                                         <label class="control-label col-lg-3" for="username">Serial Number</label>
                                         <div class="col-lg-9">
-                                            <input type="number" class="form-control" id="serialNumber" placeholder="Enter your serial number" title="Serial Number">
+                                            <input type="text" class="form-control" id="serialNumber" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-3" for="password">Token</label>
+                                        <div class="col-lg-9">
+                                            <input type="number" class="form-control" id="token" placeholder="Enter the token sent to you">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Pick Up Branch</label>
+                                        <div class="col-lg-9">
+                                            <select class="form-control" id="pickUpBranch" title="User Branch"></select>
                                         </div>
                                     </div>
                                     <div class="col-lg-9 col-lg-offset-3">
-                                        <button id="addBtn" onclick="requestCard()" type="submit" class="btn btn-info btn-sm">Request</button>
+                                        <button id="addBtn" onclick="continueRequestCard()" type="submit" class="btn btn-info btn-sm">Request</button>
                                     </div>
                                     <br />
                                 </div>
@@ -73,7 +77,8 @@
                         </div>
 
                         <div class="widget-foot">
-                            Request for your debit card.
+                            Kindly enter the token sent your email to continue with your card request.<br />
+                            <a href="~/Customer/CustomerCardRequest">Back to Card Request Form</a>
                         </div>
                     </div>
                 </div>

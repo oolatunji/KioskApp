@@ -1,4 +1,5 @@
 ﻿using KioskSolutionLibrary.DataLibrary;
+using KioskSolutionLibrary.ModelLibrary;
 using KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,18 @@ namespace KioskSolutionLibrary.ProcessLibrary
                     message = string.Empty;
                     return CustomerDL.Save(customer);
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static bool SaveCardRequest(CardRequest cardRequest)
+        {
+            try
+            {
+                return CustomerDL.SaveCardRequest(cardRequest);
             }
             catch (Exception ex)
             {
@@ -79,16 +92,39 @@ namespace KioskSolutionLibrary.ProcessLibrary
             }
         }
 
-        public static Branch RetrieveBranchByID(long? branchID)
+        public static dynamic SendTokenToCustomer(string accountNumber, string serialNumber)
         {
             try
             {
-                return BranchDL.RetrieveBranchByID(branchID);
+                dynamic returnedCustomer = new System.Dynamic.ExpandoObject();
+                if (!string.IsNullOrEmpty(serialNumber) && CustomerDL.CustomerCardRequestExists(serialNumber))
+                {
+                    throw new Exception(string.Format("Serial Number: {0} is already used. Kindly make use of another.", serialNumber));
+                }
+                else
+                {
+                    Customer customer = CustomerDL.RetrieveCustomerByAccountNumber(accountNumber);
+                    if (customer != null)
+                    {
+                        Random random = new Random();
+                        string token = random.Next(1999, 9999).ToString();
+                        returnedCustomer.customerID = customer.ID;
+                        returnedCustomer.customerToken = token;
+
+                        Mail.SendCardRequest(customer, token);
+
+                        return returnedCustomer;
+                    }
+                    else
+                    {
+                        throw new Exception(string.Format("Invalid customer with account number: {0}", accountNumber));
+                    }
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }        
+        }     
     }
 }

@@ -85,6 +85,15 @@ namespace KioskSolution
             bundles.Add(new ScriptBundle("~/bundles/viewcustomer").Include(
                       "~/Scripts/Customer/ViewCustomer.js"
                       ));
+
+            bundles.Add(new ScriptBundle("~/bundles/customercardrequest").Include(
+                     "~/Scripts/Customer/CardRequest.js"
+                     ));
+
+            bundles.Add(new ScriptBundle("~/bundles/confirmcardrequest").Include(
+                    "~/Scripts/Customer/ConfirmToken.js"
+                    ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/font-awesome.min.css",

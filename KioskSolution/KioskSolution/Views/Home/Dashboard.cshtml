@@ -8,10 +8,10 @@
 
     <!-- Breadcrumb -->
     <div class="bread-crumb pull-right">
-        <a href="~/AdminHome/Dashboard"><i class="fa fa-tachometer"></i> Home</a>
+        <a href="~/Home/Dashboard"><i class="fa fa-tachometer"></i> Home</a>
         <!-- Divider -->
         <span class="divider">/</span>
-        <a href="~/AdminHome/Dashboard" class="bread-current"> Dashboard</a>
+        <a href="~/Home/Dashboard" class="bread-current"> Dashboard</a>
     </div>
 
     <div class="clearfix"></div>
@@ -20,23 +20,23 @@
 <div class="matter">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6" name="iparent_link">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-folder fa-5x"></i>
+                                <i class="fa fa-wrench fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div>Property</div>
+                                <div>Function Management</div>
                             </div>
                         </div>
                     </div>
                     <a href="#">
                         <div class="panel-footer">
                             <span class="pull-left">
-                                <a href="~/Property/UploadProperty" style="font-size:12px">Upload | </a>
-                                <a href="~/Property/ViewProperty" style="font-size:12px">View |</a>
+                                <a name="ilinks" href="~/Function/AddFunction" id="/Function/AddFunction" style="font-size:12px">Add | </a>
+                                <a name="ilinks"  href="~/Function/ViewFunction" id="/Function/ViewFunction" style="font-size:12px">View |</a>
                             </span>
                             <div class="clearfix"></div>
                         </div>
@@ -44,30 +44,99 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6" name="iparent_link">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-book fa-5x"></i>
+                                <i class="fa fa-check fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div>E-Mail Templates</div>
+                                <div>Role Management</div>
                             </div>
                         </div>
                     </div>
                     <a href="#">
                         <div class="panel-footer">
                             <span class="pull-left">
-                                <a href="~/MailTemplate/MailTemplate" style="font-size:12px">View | </a>
+                                <a name="ilinks" href="~/Role/AddRole" id="/Role/AddRole" style="font-size:12px">Add | </a>
+                                <a name="ilinks" href="~/Role/ViewRole" id="/Role/ViewRole" style="font-size:12px">View |</a>
                             </span>
-
                             <div class="clearfix"></div>
                         </div>
                     </a>
                 </div>
             </div>
 
+            <div class="col-lg-3 col-md-6" name="iparent_link">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-bank fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div>Branch Management</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">
+                                <a name="ilinks" href="~/Branch/AddBranch" id="/Branch/AddBranch" style="font-size:12px">Add | </a>
+                                <a name="ilinks" href="~/Branch/ViewBranch" id="/Branch/ViewBranch" style="font-size:12px">View |</a>
+                            </span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" name="iparent_link">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-user fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div>User Management</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">
+                                <a name="ilinks" href="~/User/AddUser" id="/User/AddUser" style="font-size:12px">Add | </a>
+                                <a name="ilinks" href="~/User/ViewUser" id="/User/ViewUser" style="font-size:12px">View |</a>
+                            </span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" name="iparent_link">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div>Customer Management</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">
+                                <a name="ilinks" href="~/Customer/AddCustomer" id="/Customer/AddCustomer" style="font-size:12px">Add | </a>
+                                <a name="ilinks" href="~/Customer/ViewCustomer" id="/Customer/ViewCustomer" style="font-size:12px">View |</a>
+                            </span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
             <div class="col-lg-3 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
