@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Add Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/bundles/addcustomer")
+
+<div class="page-head">
+    <h2 class="pull-left"><i class="fa fa-users"></i> Customer Management</h2>
+
+    <!-- Breadcrumb -->
+    <div class="bread-crumb pull-right">
+        <a><i class="fa fa-users"></i> Customer Management</a>
+        <!-- Divider -->
+        <span class="divider">/</span>
+        <a class="bread-current"> Add Customer</a>
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>
+<div class="matter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <div class="widget wgreen">
+
+                    <div class="widget-head">
+                        <div class="pull-left">Add Customer</div>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="padd">
+                            <br />
+                            <!-- Form starts.  -->
+                            <form class="form-horizontal" role="form">
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Lastname</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" title="Lastname" placeholder="Enter Lastname" id="lastname" autofocus="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Othernames</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" title="Othernames" placeholder="Enter Othernames" id="othernames" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Email Address</label>
+                                    <div class="col-lg-5">
+                                        <input type="email" class="form-control" title="Email Address" placeholder="Enter Email Address" id="emailAddress" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Phone Number</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" title="Phone Number" placeholder="Phone Number" id="phoneNumber" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-6">
+                                        <button id="addBtn" type="button" class="btn btn-outline btn-primary" onclick="addCustomer()"><i class="fa fa-cog"></i> Add</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        Add new system customer.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

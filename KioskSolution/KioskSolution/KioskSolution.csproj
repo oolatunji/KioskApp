@@ -171,6 +171,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BranchAPIController.cs" />
     <Compile Include="Controllers\BranchController.cs" />
+    <Compile Include="Controllers\CustomerAPIController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\FunctionAPIController.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -432,6 +434,8 @@
     <Content Include="Scripts\Branch\ViewBranch.js" />
     <Content Include="Scripts\charts.js" />
     <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\Customer\AddCustomer.js" />
+    <Content Include="Scripts\Customer\ViewCustomer.js" />
     <Content Include="Scripts\dataTables.tableTools.js" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\DynamicMenu\Dashboard.js" />
@@ -518,6 +522,9 @@
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\Customer\AddCustomer.cshtml" />
+    <Content Include="Views\Customer\ViewCustomer.cshtml" />
+    <Content Include="Views\Customer\CustomerCardRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KioskSolutionLibrary\KioskSolutionLibrary.csproj">

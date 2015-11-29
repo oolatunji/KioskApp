@@ -102,7 +102,13 @@
                         <li><a href="~/User/ViewUser" id="/User/ViewUser" name="links"><i class="fa fa-folder"></i> View Users</a></li>
                     </ul>
                 </li>
-                <li><a href="~/MailTemplate/MailTemplate"><i class="fa fa-book"></i> E-Mail Template</a></li>
+                <li class="has_sub">
+                    <a href="#"><i class="fa fa-users"></i> Customers  <span class="pull-right"><i class="fa fa-chevron-right"></i></span></a>
+                    <ul>
+                        <li><a href="~/Customer/AddCustomer" id="/Customer/AddCustomer" name="links"><i class="fa fa-plus-square"></i> Register Customer</a></li>
+                        <li><a href="~/Customer/ViewCustomer" id="/Customer/ViewCustomer" name="links"><i class="fa fa-folder"></i> View Customers</a></li>
+                    </ul>
+                </li>
                 <li><a href="~/Password/ChangePassword"><i class="fa fa-pencil-square-o"></i> Change Password</a></li>
                 <li>
                     @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)

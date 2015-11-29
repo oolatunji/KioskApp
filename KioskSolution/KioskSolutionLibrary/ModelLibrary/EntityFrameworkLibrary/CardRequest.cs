@@ -12,20 +12,17 @@ namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary
     using System;
     using System.Collections.Generic;
     
-    public partial class Branch
+    public partial class CardRequest
     {
-        public Branch()
-        {
-            this.Users = new HashSet<User>();
-            this.CardRequests = new HashSet<CardRequest>();
-        }
-    
         public long ID { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public string Address { get; set; }
+        public long CustomerID { get; set; }
+        public string CardType { get; set; }
+        public long PickupBranchID { get; set; }
+        public string RequestType { get; set; }
+        public string Status { get; set; }
+        public string ModifiedDate { get; set; }
     
-        public virtual ICollection<User> Users { get; set; }
-        public virtual ICollection<CardRequest> CardRequests { get; set; }
+        public virtual Branch Branch { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

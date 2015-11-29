@@ -9,6 +9,29 @@
     <Property Name="Code" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar" MaxLength="250" />
   </EntityType>
+  <EntityType Name="CardRequest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="bigint" Nullable="false" />
+    <Property Name="CardType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PickupBranchID" Type="bigint" Nullable="false" />
+    <Property Name="RequestType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Lastname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Othernames" Type="nvarchar" MaxLength="150" />
+    <Property Name="AccountNumber" Type="nvarchar" MaxLength="12" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Functions">
     <Key>
       <PropertyRef Name="ID" />
@@ -51,6 +74,30 @@
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="FirstTime" Type="bit" />
   </EntityType>
+  <Association Name="FK_CardRequest_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+    <End Role="CardRequest" Type="Self.CardRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CardRequest">
+        <PropertyRef Name="PickupBranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CardRequest_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="CardRequest" Type="Self.CardRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CardRequest">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_RoleFunctions_RoleFunctions">
     <End Role="Functions" Type="Self.Functions" Multiplicity="1" />
     <End Role="RoleFunctions" Type="Self.RoleFunctions" Multiplicity="*" />
@@ -101,10 +148,20 @@
   </Association>
   <EntityContainer Name="KioskWebDBStoreContainer">
     <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CardRequest" EntityType="Self.CardRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RoleFunctions" EntityType="Self.RoleFunctions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CardRequest_Branch" Association="Self.FK_CardRequest_Branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="CardRequest" EntitySet="CardRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CardRequest_Customer" Association="Self.FK_CardRequest_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="CardRequest" EntitySet="CardRequest" />
+    </AssociationSet>
     <AssociationSet Name="FK_RoleFunctions_RoleFunctions" Association="Self.FK_RoleFunctions_RoleFunctions">
       <End Role="Functions" EntitySet="Functions" />
       <End Role="RoleFunctions" EntitySet="RoleFunctions" />
