@@ -1,16 +1,16 @@
 ﻿$(document).ready(function () {
     try {
-        var currentUrl = window.location.href;
-        var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
-        var userFunctions = user.Function;
+        //var currentUrl = window.location.href;
+        //var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
+        //var userFunctions = user.Function;
 
-        var exist = false;
-        $.each(userFunctions, function (key, userfunction) {
-            var link = settingsManager.websiteURL.trimRight('/') + userfunction.PageLink;
-            if (currentUrl == link) {
-                exist = true;
-            }
-        });
+        var exist = true;
+        //$.each(userFunctions, function (key, userfunction) {
+        //    var link = settingsManager.websiteURL.trimRight('/') + userfunction.PageLink;
+        //    if (currentUrl == link) {
+        //        exist = true;
+        //    }
+        //});
 
         if (!exist)
             window.location.href = '../System/UnAuthorized';
@@ -42,11 +42,11 @@ function getFunctionsAndDisplayRoles() {
                 getRoles(functions);
             },
             error: function (xhr) {
-                displayMessage("error", 'Error experienced: ' + xhr.responseText, "Roles Management");                
+                displayMessage("error", 'Error experienced: ' + xhr.responseText);                
             }            
         });
     } catch (err) {
-        displayMessage("error", "Error encountered: " + err, "Roles Management");       
+        displayMessage("error", "Error encountered: " + err);       
     }
 }
 
@@ -98,7 +98,7 @@ function getRoles(functions) {
             "sDom": 'T<"clear">lrtip',
 
             "oTableTools": {
-                "sSwfPath": settingsManager.websiteURL + "images/copy_csv_xls_pdf.swf",
+                "sSwfPath": settingsManager.websiteURL + "img/copy_csv_xls_pdf.swf",
                 "aButtons": [
                     {
                         "sExtends": "copy",
@@ -186,10 +186,10 @@ $(document).ready(function () {
 });
 
 function format(d, allfunctions) {
-    var table = '<table width="100%" class="cell-border" cellpadding="5" cellspacing="0" border="2" style="padding-left:50px;">';
+    var table = '<form><table width="100%" class="cell-border" cellpadding="5" cellspacing="0" border="2" style="padding-left:50px;">';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Name:</td>';
-    table += '<td><input class="form-control" placeholder="Enter Role Name" id="name" value="' + d.Name + '"/></td>';
+    table += '<td><input class="form-control" title="Role Name" placeholder="Enter Role Name" id="name" value="' + d.Name + '" required/></td>';
     table += '</tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Functions:</td>';
@@ -214,9 +214,9 @@ function format(d, allfunctions) {
     table += '</tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Calibri;"></td>';
-    table += '<td><button type="button"  id="updateBtn" class="btn btn-red" style="float:right;" onclick="update();"><i class="fa fa-cog"></i> Update</button></td>';
+    table += '<td><button type="button"  id="updateBtn" class="btn btn-primary" style="float:right;" onclick="update();"><i class="fa fa-cog"></i> Update</button></td>';
     table += '</tr>';
-    table += '</table>';
+    table += '</table></form>';
 
     return table;
 }
@@ -245,42 +245,48 @@ function formatDetails(d, allfunctions) {
 }
 
 function update() {
-    try{
-        $('#updateBtn').html('<i class="fa fa-spinner fa-spin"></i> Updating...');
-        $("#updateBtn").attr("disabled", "disabled");
+    try {
+        var err = genericFormValidation();
+        if (_.isEmpty(err)) {
+            var name = $('#name').val();
+            var roleFunctions = [];
+            $("input:checkbox[name=functions]:checked").each(function () {
+                var roleFunction = {};
+                var _function = $(this).val();
+                roleFunction = { FunctionID: _function };
+                roleFunctions.push(roleFunction);
+            });
+            if (_.size(roleFunctions) > 0) {
+                $('#updateBtn').html('<i class="fa fa-spinner fa-spin"></i> Updating...');
+                $("#updateBtn").attr("disabled", "disabled");
 
-        var name = $('#name').val();
-
-        var roleFunctions = [];
-        $("input:checkbox[name=functions]:checked").each(function () {
-            var roleFunction = {};
-            var _function = $(this).val();
-            roleFunction = { FunctionID: _function };
-            roleFunctions.push(roleFunction);
-        });
-
-        var id = $('#id').val();
-    
-        var data = { Name: name, RoleFunctions: roleFunctions, ID: id };
-        $.ajax({
-            url: settingsManager.websiteURL + 'api/RoleAPI/UpdateRole',
-            type: 'PUT',
-            data: data,
-            processData: true,
-            async: true,
-            cache: false,
-            success: function (response) {
-                displayMessage("success", response, "Roles Management");
-                getFunctionsAndDisplayRoles();
-                $("#updateBtn").removeAttr("disabled");
-                $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
-            },
-            error: function (xhr) {
-                displayMessage("error", 'Error experienced: ' + xhr.responseText, "Roles Management");
-                $("#updateBtn").removeAttr("disabled");
-                $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
+                var id = $('#id').val();
+                var data = { Name: name, RoleFunctions: roleFunctions, ID: id };
+                $.ajax({
+                    url: settingsManager.websiteURL + 'api/RoleAPI/UpdateRole',
+                    type: 'PUT',
+                    data: data,
+                    processData: true,
+                    async: true,
+                    cache: false,
+                    success: function (response) {
+                        displayMessage("success", response, "Roles Management");
+                        getFunctionsAndDisplayRoles();
+                        $("#updateBtn").removeAttr("disabled");
+                        $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
+                    },
+                    error: function (xhr) {
+                        displayMessage("error", 'Error experienced: ' + xhr.responseText, "Roles Management");
+                        $("#updateBtn").removeAttr("disabled");
+                        $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
+                    }
+                });
+            } else {
+                displayMessage("error", 'Error experienced: Role Functions are required.');
             }
-        });
+        } else {
+            displayMessage("error", 'Error experienced: ' + err);
+        }
     } catch (err) {
         displayMessage("error", "Error encountered: " + err, "Roles Management");
         $("#updateBtn").removeAttr("disabled");

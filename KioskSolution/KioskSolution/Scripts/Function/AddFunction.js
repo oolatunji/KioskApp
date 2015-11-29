@@ -51,16 +51,16 @@ function addFunction() {
                     $('#addBtn').html('<i class="fa fa-cog"></i> Add');
                 },
                 error: function (xhr) {
-                    displayMessage("warning", 'Error experienced: ' + xhr.responseText);
+                    displayMessage("error", 'Error experienced: ' + xhr.responseText);
                     $("#addBtn").removeAttr("disabled");
                     $('#addBtn').html('<i class="fa fa-cog"></i> Add');
                 }
             });
         } else {
-            displayMessage("warning", 'Error experienced: ' + err);
+            displayMessage("error", 'Error experienced: ' + err);
         }
     } catch (err) {
-        displayMessage("warning", "Error encountered: " + err);
+        displayMessage("error", "Error encountered: " + err);
         $("#addBtn").removeAttr("disabled");
         $('#addBtn').html('<i class="fa fa-cog"></i> Add');
     }

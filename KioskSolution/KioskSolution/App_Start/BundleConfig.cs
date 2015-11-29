@@ -52,7 +52,31 @@ namespace KioskSolution
 
             bundles.Add(new ScriptBundle("~/bundles/viewfunctions").Include(
                      "~/Scripts/Function/ViewFunction.js"
-                     ));  
+                     ));
+
+            bundles.Add(new ScriptBundle("~/bundles/addroles").Include(
+                      "~/Scripts/Role/AddRole.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/viewroles").Include(
+                      "~/Scripts/Role/ViewRole.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/addbranch").Include(
+                      "~/Scripts/Branch/AddBranch.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/viewbranch").Include(
+                      "~/Scripts/Branch/ViewBranch.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/addusers").Include(
+                     "~/Scripts/User/AddUser.js"
+                     ));
+
+            bundles.Add(new ScriptBundle("~/bundles/viewusers").Include(
+                      "~/Scripts/User/ViewUser.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",

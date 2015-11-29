@@ -137,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Branch\" />
-    <Folder Include="Views\Role\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +510,8 @@
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Function\AddFunction.cshtml" />
     <Content Include="Views\Function\ViewFunction.cshtml" />
+    <Content Include="Views\Role\AddRole.cshtml" />
+    <Content Include="Views\Role\ViewRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KioskSolutionLibrary\KioskSolutionLibrary.csproj">

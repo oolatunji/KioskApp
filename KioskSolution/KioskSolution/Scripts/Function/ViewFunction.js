@@ -189,7 +189,7 @@ function update() {
                 }
             });
         } else {
-            displayMessage("warning", 'Error experienced: ' + err);
+            displayMessage("error", 'Error experienced: ' + err);
         }
     } catch (err) {
         displayMessage("error", "Error encountered: " + err);
