@@ -136,7 +136,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Branch\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -431,6 +430,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Branch\AddBranch.js" />
+    <Content Include="Scripts\Branch\ViewBranch.js" />
     <Content Include="Scripts\charts.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\dataTables.tableTools.js" />
@@ -512,6 +513,8 @@
     <Content Include="Views\Function\ViewFunction.cshtml" />
     <Content Include="Views\Role\AddRole.cshtml" />
     <Content Include="Views\Role\ViewRole.cshtml" />
+    <Content Include="Views\Branch\AddBranch.cshtml" />
+    <Content Include="Views\Branch\ViewBranch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KioskSolutionLibrary\KioskSolutionLibrary.csproj">
