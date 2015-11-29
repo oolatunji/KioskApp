@@ -92,6 +92,41 @@ namespace KioskSolutionLibrary.ProcessLibrary
             }
         }
 
+        public static List<Object> RetrieveCardRequests()
+        {
+            try
+            {
+                List<Object> returnedCardRequests = new List<object>();
+
+                List<CardRequest> cardRequests = CustomerDL.RetrieveCardRequest();
+
+                foreach (CardRequest cardRequest in cardRequests)
+                {
+                    Object cardRequestObj = new
+                    {
+                        ID = cardRequest.ID,
+                        CustomerName = string.Format("{0} {1}", cardRequest.Customer.Lastname, cardRequest.Customer.Othernames),
+                        AccountNumber = cardRequest.Customer.AccountNumber,
+                        PickupBranch = cardRequest.Branch.Name,
+                        CardType = cardRequest.CardType,
+                        RequestType = cardRequest.RequestType,
+                        RequestStatus = cardRequest.Status,
+                        SerialNumber = cardRequest.SerialNumber,
+                        RequestDate = String.Format("{0:G}", cardRequest.ModifiedDate),
+                        Pan = string.IsNullOrEmpty(cardRequest.EncryptedPan) ? "None" : Crypter.Decrypt(System.Configuration.ConfigurationManager.AppSettings.Get("ekey"), cardRequest.EncryptedPan)
+                    };
+
+                    returnedCardRequests.Add(cardRequestObj);
+                }
+
+                return returnedCardRequests;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static dynamic SendTokenToCustomer(string accountNumber, string serialNumber)
         {
             try

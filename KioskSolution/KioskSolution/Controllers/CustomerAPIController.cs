@@ -119,5 +119,23 @@ namespace KioskSolution.Controllers
                 return response;
             }
         }
+
+        [HttpGet]
+        public HttpResponseMessage RetrieveCardRequests()
+        {
+            try
+            {
+                IEnumerable<Object> cardRequests = CustomerPL.RetrieveCardRequests();
+                object returnedCardRequests = new { data = cardRequests };
+                return Request.CreateResponse(HttpStatusCode.OK, returnedCardRequests);
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex);
+                var response = Request.CreateResponse(HttpStatusCode.BadRequest);
+                response.ReasonPhrase = ex.Message;
+                return response;
+            }
+        }
     }
 }

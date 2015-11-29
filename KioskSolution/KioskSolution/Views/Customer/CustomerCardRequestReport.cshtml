@@ -1,8 +1,78 @@
 ﻿
 @{
-    ViewBag.Title = "CustomerCardRequestReport";
+    ViewBag.Title = "Card Request Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CustomerCardRequestReport</h2>
+@Scripts.Render("~/bundles/viewcardrequest")
 
+<div class="page-head">
+    <h2 class="pull-left"><i class="fa fa-users"></i> Customer Management</h2>
+
+    <!-- Breadcrumb -->
+    <div class="bread-crumb pull-right">
+        <a><i class="fa fa-users"></i> Customer Management</a>
+        <!-- Divider -->
+        <span class="divider">/</span>
+        <a class="bread-current"> Approve Card Request</a>
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>
+<div class="matter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <div class="widget wgreen">
+
+                    <div class="widget-head">
+                        <div class="pull-left">Card Request List</div>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="padd">
+                            <br />
+                            <table id="example" class="cell-border order-column" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Customer Name</th>
+                                        <th>Account Number</th>
+                                        <th>Pan</th>
+                                        <th>Pick Up Branch</th>
+                                        <th>Card Type</th>
+                                        <th>Request Type</th>
+                                        <th>Request Date</th>
+                                        <th>Serial Number</th>
+                                    </tr>
+                                </thead>
+
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>Customer Name</th>
+                                        <th>Account Number</th>
+                                        <th>Pan</th>
+                                        <th>Pick Up Branch</th>
+                                        <th>Card Type</th>
+                                        <th>Request Type</th>
+                                        <th>Request Date</th>
+                                        <th>Serial Number</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        View all system customers.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

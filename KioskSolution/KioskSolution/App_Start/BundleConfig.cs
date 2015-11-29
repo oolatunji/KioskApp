@@ -94,6 +94,10 @@ namespace KioskSolution
                     "~/Scripts/Customer/ConfirmToken.js"
                     ));
 
+            bundles.Add(new ScriptBundle("~/bundles/viewcardrequest").Include(
+                    "~/Scripts/Customer/ViewCardRequest.js"
+                    ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/font-awesome.min.css",

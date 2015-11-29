@@ -440,6 +440,7 @@
     <Content Include="Scripts\Customer\AddCustomer.js" />
     <Content Include="Scripts\Customer\CardRequest.js" />
     <Content Include="Scripts\Customer\ConfirmToken.js" />
+    <Content Include="Scripts\Customer\ViewCardRequest.js" />
     <Content Include="Scripts\Customer\ViewCustomer.js" />
     <Content Include="Scripts\dataTables.tableTools.js" />
     <Content Include="Scripts\default.js" />

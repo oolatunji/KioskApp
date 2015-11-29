@@ -113,6 +113,26 @@ namespace KioskSolutionLibrary.DataLibrary
             }
         }
 
+        public static List<CardRequest> RetrieveCardRequest()
+        {
+            try
+            {
+                using (var context = new KioskWebDBEntities())
+                {
+                    var cardRequests = context.CardRequests
+                                    .Include(cr => cr.Branch)
+                                    .Include(cr => cr.Customer)
+                                    .ToList();
+
+                    return cardRequests;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static Customer RetrieveCustomerByID(long? customerID)
         {
             try
