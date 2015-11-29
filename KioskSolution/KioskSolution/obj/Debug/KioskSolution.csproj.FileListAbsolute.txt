@@ -5,6 +5,7 @@ C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Ki
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Antlr3.Runtime.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\EntityFramework.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\EntityFramework.SqlServer.dll
+C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\KioskSolutionLibrary.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Microsoft.Owin.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Microsoft.Owin.Security.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Microsoft.Owin.Security.OAuth.dll
@@ -23,6 +24,7 @@ C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Sy
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\System.Web.WebPages.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\System.Web.WebPages.Razor.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\WebGrease.dll
+C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\KioskSolutionLibrary.pdb
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\EntityFramework.xml
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\EntityFramework.SqlServer.xml
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Microsoft.Owin.xml
