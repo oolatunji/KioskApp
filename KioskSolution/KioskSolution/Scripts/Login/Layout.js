@@ -6,8 +6,7 @@
     } else {
 
         var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
-        $('#theLoggedInUser').html(user.Username);
-        $('#theLoggedInUserRole').html(user.Role);
+        $('#theLoggedInUser').html(' ' + user.Username + ' [' + user.Role + ']');
     }
 });
 

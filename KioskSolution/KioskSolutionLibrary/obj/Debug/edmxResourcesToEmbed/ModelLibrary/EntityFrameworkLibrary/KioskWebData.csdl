@@ -2,13 +2,23 @@
 <Schema Namespace="KioskWebDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="KioskWebDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Branches" EntityType="KioskWebDB.Branch" />
+    <EntitySet Name="CardRequests" EntityType="KioskWebDB.CardRequest" />
+    <EntitySet Name="Customers" EntityType="KioskWebDB.Customer" />
     <EntitySet Name="Functions" EntityType="KioskWebDB.Function" />
     <EntitySet Name="RoleFunctions" EntityType="KioskWebDB.RoleFunction" />
     <EntitySet Name="Roles" EntityType="KioskWebDB.Role" />
     <EntitySet Name="Users" EntityType="KioskWebDB.User" />
+    <AssociationSet Name="FK_CardRequest_Branch" Association="KioskWebDB.FK_CardRequest_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="CardRequest" EntitySet="CardRequests" />
+    </AssociationSet>
     <AssociationSet Name="FK_Users_Branch" Association="KioskWebDB.FK_Users_Branch">
       <End Role="Branch" EntitySet="Branches" />
       <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CardRequest_Customer" Association="KioskWebDB.FK_CardRequest_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="CardRequest" EntitySet="CardRequests" />
     </AssociationSet>
     <AssociationSet Name="FK_RoleFunctions_RoleFunctions" Association="KioskWebDB.FK_RoleFunctions_RoleFunctions">
       <End Role="Function" EntitySet="Functions" />
@@ -22,16 +32,6 @@
       <End Role="Role" EntitySet="Roles" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
-    <EntitySet Name="Customers" EntityType="KioskWebDB.Customer" />
-    <EntitySet Name="CardRequests" EntityType="KioskWebDB.CardRequest" />
-    <AssociationSet Name="FK_CardRequest_Branch" Association="KioskWebDB.FK_CardRequest_Branch">
-      <End Role="Branch" EntitySet="Branches" />
-      <End Role="CardRequest" EntitySet="CardRequests" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CardRequest_Customer" Association="KioskWebDB.FK_CardRequest_Customer">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="CardRequest" EntitySet="CardRequests" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Branch">
     <Key>
@@ -41,8 +41,37 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Users" Relationship="KioskWebDB.FK_Users_Branch" FromRole="Branch" ToRole="User" />
     <NavigationProperty Name="CardRequests" Relationship="KioskWebDB.FK_CardRequest_Branch" FromRole="Branch" ToRole="CardRequest" />
+    <NavigationProperty Name="Users" Relationship="KioskWebDB.FK_Users_Branch" FromRole="Branch" ToRole="User" />
+  </EntityType>
+  <EntityType Name="CardRequest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int64" Nullable="false" />
+    <Property Name="CardType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PickupBranchID" Type="Int64" Nullable="false" />
+    <Property Name="RequestType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HashedPan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EncryptedPan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Branch" Relationship="KioskWebDB.FK_CardRequest_Branch" FromRole="CardRequest" ToRole="Branch" />
+    <NavigationProperty Name="Customer" Relationship="KioskWebDB.FK_CardRequest_Customer" FromRole="CardRequest" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Othernames" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AccountNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CardRequests" Relationship="KioskWebDB.FK_CardRequest_Customer" FromRole="Customer" ToRole="CardRequest" />
   </EntityType>
   <EntityType Name="Function">
     <Key>
@@ -93,6 +122,18 @@
     <NavigationProperty Name="Branch" Relationship="KioskWebDB.FK_Users_Branch" FromRole="User" ToRole="Branch" />
     <NavigationProperty Name="Role" Relationship="KioskWebDB.FK_Users_Roles" FromRole="User" ToRole="Role" />
   </EntityType>
+  <Association Name="FK_CardRequest_Branch">
+    <End Type="KioskWebDB.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="KioskWebDB.CardRequest" Role="CardRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CardRequest">
+        <PropertyRef Name="PickupBranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Users_Branch">
     <End Type="KioskWebDB.Branch" Role="Branch" Multiplicity="0..1" />
     <End Type="KioskWebDB.User" Role="User" Multiplicity="*" />
@@ -102,6 +143,18 @@
       </Principal>
       <Dependent Role="User">
         <PropertyRef Name="UserBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CardRequest_Customer">
+    <End Type="KioskWebDB.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="KioskWebDB.CardRequest" Role="CardRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CardRequest">
+        <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -138,59 +191,6 @@
       </Principal>
       <Dependent Role="User">
         <PropertyRef Name="UserRole" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Customer">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Othernames" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="AccountNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CardRequests" Relationship="KioskWebDB.FK_CardRequest_Customer" FromRole="Customer" ToRole="CardRequest" />
-  </EntityType>
-  <EntityType Name="CardRequest">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CustomerID" Type="Int64" Nullable="false" />
-    <Property Name="CardType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PickupBranchID" Type="Int64" Nullable="false" />
-    <Property Name="RequestType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="HashedPan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="EncryptedPan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Branch" Relationship="KioskWebDB.FK_CardRequest_Branch" FromRole="CardRequest" ToRole="Branch" />
-    <NavigationProperty Name="Customer" Relationship="KioskWebDB.FK_CardRequest_Customer" FromRole="CardRequest" ToRole="Customer" />
-  </EntityType>
-  <Association Name="FK_CardRequest_Branch">
-    <End Type="KioskWebDB.Branch" Role="Branch" Multiplicity="1" />
-    <End Type="KioskWebDB.CardRequest" Role="CardRequest" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Branch">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CardRequest">
-        <PropertyRef Name="PickupBranchID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CardRequest_Customer">
-    <End Type="KioskWebDB.Customer" Role="Customer" Multiplicity="1" />
-    <End Type="KioskWebDB.CardRequest" Role="CardRequest" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CardRequest">
-        <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

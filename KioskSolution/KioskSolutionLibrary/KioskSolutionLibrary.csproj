@@ -90,6 +90,45 @@
     <Compile Include="ModelLibrary\EntityFrameworkLibrary\RoleFunction.cs">
       <DependentUpon>KioskWebData.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardAccountRequest.cs">
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardAccountRequests_UBA.cs">
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardIssuanceKIOSKData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CardIssuanceKIOSKData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardIssuanceKIOSKData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardIssuanceKIOSKData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CardIssuanceKIOSKData.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\HubMaster.cs">
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\OTPDetail.cs">
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\PANDetail.cs">
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\PANDetailsold.cs">
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\PrinterTypeDetail.cs">
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\User.cs">
+      <DependentUpon>CardIssuanceKIOSKData.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelLibrary\EntityFrameworkLibrary\User.cs">
       <DependentUpon>KioskWebData.tt</DependentUpon>
     </Compile>
@@ -128,6 +167,23 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>KioskWebData.edmx</DependentUpon>
       <LastGenOutput>KioskWebData.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardIssuanceKIOSKData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CardIssuanceKIOSKData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardIssuanceKIOSKData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CardIssuanceKIOSKData.edmx</DependentUpon>
+      <LastGenOutput>CardIssuanceKIOSKData.Context.cs</LastGenOutput>
+    </None>
+    <None Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardIssuanceKIOSKData.edmx.diagram">
+      <DependentUpon>CardIssuanceKIOSKData.edmx</DependentUpon>
+    </None>
+    <None Include="ModelLibrary\EntityFrameworkLibrary\ThirdPartyData\CardIssuanceKIOSKData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CardIssuanceKIOSKData.edmx</DependentUpon>
+      <LastGenOutput>CardIssuanceKIOSKData.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

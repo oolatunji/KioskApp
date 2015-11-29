@@ -1,30 +1,4 @@
-﻿$(document).ready(function () {
-
-    $('#useSmartCardAuthentication').html('');
-    var optionsHtml = "";
-    optionsHtml += '<option selected="selected" value="true">True</option>';
-    optionsHtml += '<option value="false">False</option>';
-    $('#useSmartCardAuthentication').append(optionsHtml);
-
-    $('#printerFeedsPollingTime').html('');
-    var timesHtml = "";
-    var times = feedTimes();
-    $.each(times, function (key, value) {
-        timesHtml += '<option value="' + value + '">' + value + '</option>';
-    });
-
-    $('#printerFeedsPollingTime').append(timesHtml);
-});
-
-function feedTimes() {
-    var times = [];
-    for (var i = 1; i <= 15; i++) {
-        times.push(i);
-    }
-    return times;
-}
-
-function getDefaultSettings() {
+﻿function getDefaultSettings() {
     try {
         //Get System Settings
         var applicationUrl = prompt("Enter Application Url.","");
@@ -42,30 +16,6 @@ function getDefaultSettings() {
                     $('#bankName').val(settings.GeneralSettings.Organization);
                     $('#applicationName').val(settings.GeneralSettings.ApplicationName);
                     $('#logFilePath').val(settings.GeneralSettings.LogFilePath);
-                    
-                    $('#useSmartCardAuthentication').html('');
-                    var optionsHtml = "";
-                    if (settings.GeneralSettings.UseSmartCardAuthentication == 'true') {
-                        optionsHtml += '<option selected="selected" value="true">True</option>';
-                        optionsHtml += '<option value="false">False</option>';
-                        $('#useSmartCardAuthentication').append(optionsHtml);
-                    } else {
-                        optionsHtml += '<option value="true">True</option>';
-                        optionsHtml += '<option selected="selected" value="false">False</option>';
-                        $('#useSmartCardAuthentication').append(optionsHtml);
-                    }
-
-                    $('#printerFeedsPollingTime').html('');
-                    var timesHtml = "";
-                    var times = feedTimes();
-                    $.each(times, function (key, value) {
-                        if (settings.GeneralSettings.PrinterFeedsPollingTime == value) {
-                            timesHtml += '<option selected="selected" value="' + value + '">' + value + '</option>';
-                        } else {
-                            timesHtml += '<option value="' + value + '">' + value + '</option>';
-                        }
-                    });
-                    $('#printerFeedsPollingTime').append(timesHtml);
 
                     $('#fromEmailAddress').val(settings.MailSettings.FromEmailAddress);
                     $('#smtpUsername').val(settings.MailSettings.SmtpUsername);
@@ -78,14 +28,19 @@ function getDefaultSettings() {
                     $('#databaseUser').val(settings.DatabaseSettings.DatabaseUser);
                     $('#databasePassword').val(settings.DatabaseSettings.DatabasePassword);
 
+                    $('#databaseServerThirdParty').val(settings.ThirdPartyDatabaseSettings.DatabaseServer);
+                    $('#databaseNameThirdParty').val(settings.ThirdPartyDatabaseSettings.DatabaseName);
+                    $('#databaseUserThirdParty').val(settings.ThirdPartyDatabaseSettings.DatabaseUser);
+                    $('#databasePasswordThirdParty').val(settings.ThirdPartyDatabaseSettings.DatabasePassword);
+
                     $("#getBtn").removeAttr("disabled");
                     $('#getBtn').html('<i class="fa fa-cog"></i> Get Default Settings');
                 },
                 error: function (xhr) {
                     if (xhr.status = 404)
-                        displayMessage("error", 'Error experienced: Incorrect Application Url.', "System Management");
+                        displayMessage("error", 'Error experienced: Incorrect Application Url.');
                     else
-                        displayMessage("error", 'Error experienced: ' + xhr.responseText, "System Management");
+                        displayMessage("error", 'Error experienced: ' + xhr.responseText);
                     console.log(xhr);
                     $("#getBtn").removeAttr("disabled");
                     $('#getBtn').html('<i class="fa fa-cog"></i> Get Default Settings');
@@ -93,12 +48,12 @@ function getDefaultSettings() {
             });
         } else {
             if (applicationUrl == "") {
-                displayMessage("error", "Error encountered: Enter System's Application Url to get Default System's Settings", "System Management");
+                displayMessage("error", "Error encountered: Enter System's Application Url to get Default System's Settings");
             }
         }
 
     } catch (err) {
-        displayMessage("error", "Error encountered: " + err, "System Management");
+        displayMessage("error", "Error encountered: " + err);
         console.log(xhr);
         $("#getBtn").removeAttr("disabled");
         $('#getBtn').html('<i class="fa fa-cog"></i> Get Default Settings');
@@ -119,18 +74,21 @@ function configure() {
         var databaseName = $('#databaseName').val();
         var databaseUser = $('#databaseUser').val();
         var databasePassword = $('#databasePassword').val();
-        var useSmartCardAuthentication = $('#useSmartCardAuthentication').val();
-        var printerFeedsPollingTime = $('#printerFeedsPollingTime').val();
+        var databaseServerThirdParty = $('#databaseServerThirdParty').val();
+        var databaseNameThirdParty = $('#databaseNameThirdParty').val();
+        var databaseUserThirdParty = $('#databaseUserThirdParty').val();
+        var databasePasswordThirdParty = $('#databasePasswordThirdParty').val();
+
 
         if (websiteUrl == "") {
-            displayMessage("error", 'Kindly enter Application Url', "System Management");
+            displayMessage("error", 'Kindly enter Application Url');
         } else {
             var acknowledge = confirm("Are you sure you want to configure the System with the captured settings?");
             if (acknowledge) {
                 $('#addBtn').html('<i class="fa fa-spinner fa-spin"></i> Configuring System...');
                 $("#addBtn").attr("disabled", "disabled");
 
-                var data = { WebsiteUrl: websiteUrl, Organization: organization, ApplicationName: applicationName, FromEmailAddress: fromEmailAddress, SmtpUsername: smtpUsername, SmtpPassword: smtpPassword, SmtpHost: smtpHost, SmtpPort: smtpPort, DatabaseServer: databaseServer, DatabaseName: databaseName, DatabaseUser: databaseUser, DatabasePassword: databasePassword, UseSmartCardAuthentication: useSmartCardAuthentication, PrinterFeedsPollingTime: printerFeedsPollingTime };
+                var data = { WebsiteUrl: websiteUrl, Organization: organization, ApplicationName: applicationName, FromEmailAddress: fromEmailAddress, SmtpUsername: smtpUsername, SmtpPassword: smtpPassword, SmtpHost: smtpHost, SmtpPort: smtpPort, DatabaseServer: databaseServer, DatabaseName: databaseName, DatabaseUser: databaseUser, DatabasePassword: databasePassword, DatabaseServerThirdParty: databaseServerThirdParty, DatabaseNameThirdParty: databaseNameThirdParty, DatabaseUserThirdParty: databaseUserThirdParty, DatabasePasswordThirdParty: databasePasswordThirdParty };
 
                 $.ajax({
                     url: websiteUrl + 'api/SystemAPI/ConfigureSystem',
@@ -154,20 +112,20 @@ function configure() {
                     },
                     error: function (xhr) {
                         if (xhr.status == 404)
-                            displayMessage("error", 'Error experienced: Incorrect Application Url.', "System Management");
+                            displayMessage("error", 'Error experienced: Incorrect Application Url.');
                         else
-                            displayMessage("error", 'Error experienced: ' + xhr.responseText, "System Management");
+                            displayMessage("error", 'Error experienced: ' + xhr.responseText);
                         console.log(xhr);
                         $("#addBtn").removeAttr("disabled");
                         $('#addBtn').html('<i class="fa fa-cog"></i> Configure');
                     }
                 });
             } else {
-                displayMessage("info", 'System Configuration Cancelled', "System Management");
+                displayMessage("info", 'System Configuration Cancelled');
             }
         }
     } catch (err) {
-        displayMessage("error", "Error encountered: " + err, "System Management");
+        displayMessage("error", "Error encountered: " + err);
         console.log(err);
         $("#addBtn").removeAttr("disabled");
         $('#addBtn').html('<i class="fa fa-cog"></i> Configure');

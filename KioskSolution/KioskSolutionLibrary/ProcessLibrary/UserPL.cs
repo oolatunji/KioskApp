@@ -97,7 +97,8 @@ namespace KioskSolutionLibrary.ProcessLibrary
 
                     List<dynamic> userFunctions = new List<dynamic>();
 
-                    foreach (RoleFunction roleFunction in user.Role.RoleFunctions)
+                    Role userRole = RoleDL.RetrieveRoleByID(user.UserRole);
+                    foreach (RoleFunction roleFunction in userRole.RoleFunctions)
                     {
                         dynamic function = new
                         {
@@ -110,8 +111,9 @@ namespace KioskSolutionLibrary.ProcessLibrary
 
                     userObj.ID = user.ID;
                     userObj.Username = user.Username;
-                    userObj.Role = user.Role.Name;
+                    userObj.Role = userRole.Name;
                     userObj.Function = userFunctions;
+                    userObj.BranchID = BranchDL.RetrieveBranchByID(user.UserBranch).ID;
 
                     return userObj;
                 }

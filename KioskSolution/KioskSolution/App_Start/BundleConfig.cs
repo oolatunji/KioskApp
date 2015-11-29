@@ -44,7 +44,13 @@ namespace KioskSolution
                       "~/Scripts/custom.js",
                       "~/Scripts/Utility/configFile.js",
                       "~/Scripts/Utility/messageBox.js",
-                      "~/Scripts/Utility/flexiAppsCustomFormValidation.js"));
+                      "~/Scripts/Utility/SystemConfiguration.js",
+                      "~/Scripts/Utility/flexiAppsCustomFormValidation.js",
+                      "~/Scripts/Login/Login.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/configureSystem").Include(
+                    "~/Scripts/Utility/ConfigureSystem.js"
+                    ));    
 
             bundles.Add(new ScriptBundle("~/bundles/addfunctions").Include(
                       "~/Scripts/Function/AddFunction.js"
@@ -96,6 +102,27 @@ namespace KioskSolution
 
             bundles.Add(new ScriptBundle("~/bundles/viewcardrequest").Include(
                     "~/Scripts/Customer/ViewCardRequest.js"
+                    ));
+
+            bundles.Add(new ScriptBundle("~/bundles/layout").Include(
+                    "~/Scripts/Login/Layout.js",
+                    "~/Scripts/DynamicMenu/Layout.js"
+                    ));
+
+            bundles.Add(new ScriptBundle("~/bundles/dashboard").Include(
+                    "~/Scripts/DynamicMenu/Dashboard.js"
+                    ));
+
+            bundles.Add(new ScriptBundle("~/bundles/changepassword").Include(
+                    "~/Scripts/Password/ChangePassword.js"
+                    ));
+
+            bundles.Add(new ScriptBundle("~/bundles/forgotpassword").Include(
+                    "~/Scripts/Password/ForgotPassword.js"
+                    ));
+
+            bundles.Add(new ScriptBundle("~/bundles/resetpassword").Include(
+                    "~/Scripts/Password/PasswordReset.js"
                     ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

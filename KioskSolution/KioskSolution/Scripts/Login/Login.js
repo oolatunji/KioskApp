@@ -6,7 +6,7 @@
 
         var err = loginValidation(username, password);
         if (err != "") {
-            displayMessage("error", "Error encountered: " + err, "User Login");
+            displayMessage("error", "Error encountered: " + err);
         } else {
 
             $('#addBtn').html('<i class="fa fa-spinner fa-spin"></i> Login...');
@@ -37,7 +37,7 @@
                     if (xhr.status == 404)
                         displayMessage("error", 'Error experienced: Incorrect System Application Url.', "User Login");
                     else
-                        displayMessage("error", 'Error experienced: ' + xhr.responseText, "User Login");
+                        displayMessage("error", 'Error experienced: ' + xhr.responseText);
                     console.log(xhr);
                     $("#addBtn").removeAttr("disabled");
                     $('#addBtn').html('<i class="fa fa-user"></i> Login');
@@ -45,7 +45,7 @@
             });
         }
     } catch (err) {
-        displayMessage("error", "Error encountered: " + err, "User Login");
+        displayMessage("error", "Error encountered: " + err);
         console.log(err);
         $("#addBtn").removeAttr("disabled");
         $('#addBtn').html('<i class="fa fa-user"></i> Login');

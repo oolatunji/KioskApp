@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary
+namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class KioskWebDBEntities : DbContext
+    public partial class CardIssuanceKIOSKEntities : DbContext
     {
-        public KioskWebDBEntities()
-            : base("name=KioskWebDBEntities")
+        public CardIssuanceKIOSKEntities()
+            : base("name=CardIssuanceKIOSKEntities")
         {
         }
     
@@ -25,12 +25,13 @@ namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Branch> Branches { get; set; }
-        public virtual DbSet<CardRequest> CardRequests { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Function> Functions { get; set; }
-        public virtual DbSet<RoleFunction> RoleFunctions { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<CardAccountRequest> CardAccountRequests { get; set; }
+        public virtual DbSet<CardAccountRequests_UBA> CardAccountRequests_UBA { get; set; }
+        public virtual DbSet<HubMaster> HubMasters { get; set; }
+        public virtual DbSet<PANDetailsold> PANDetailsolds { get; set; }
+        public virtual DbSet<PrinterTypeDetail> PrinterTypeDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<OTPDetail> OTPDetails { get; set; }
+        public virtual DbSet<PANDetail> PANDetails { get; set; }
     }
 }

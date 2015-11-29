@@ -7,25 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary
+namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Branch
+    public partial class PrinterTypeDetail
     {
-        public Branch()
-        {
-            this.CardRequests = new HashSet<CardRequest>();
-            this.Users = new HashSet<User>();
-        }
-    
-        public long ID { get; set; }
-        public string Name { get; set; }
+        public string idNumber { get; set; }
         public string Code { get; set; }
-        public string Address { get; set; }
-    
-        public virtual ICollection<CardRequest> CardRequests { get; set; }
-        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -7,4 +7,3 @@ C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolutionLibrary
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolutionLibrary\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolutionLibrary\obj\Debug\KioskSolutionLibrary.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolutionLibrary\obj\Debug\KioskSolutionLibrary.pdb
-C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolutionLibrary\obj\Debug\KioskSolutionLibrary.csprojResolveAssemblyReference.cache

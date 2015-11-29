@@ -1,8 +1,10 @@
 ﻿@{
+    ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!-- Page heading -->
+@Scripts.Render("~/bundles/dashboard")
 <div class="page-head">
     <h2 class="pull-left"><i class="fa fa-tachometer"></i> Dashboard</h2>
 
@@ -138,6 +140,28 @@
                     </a>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-6" name="iparent_link">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-cog fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div>System Configuration Management</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">
+                                <a name="ilinks" href="~/System/SystemConfiguration" id="/System/SystemConfiguration" style="font-size:12px">Configure | </a>
+                            </span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
             <div class="col-lg-3 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -153,7 +177,7 @@
                     <a href="#">
                         <div class="panel-footer">
                             <span class="pull-left">
-                                <a href="~/Password/ChangePassword" style="font-size:12px">Change | </a>
+                                <a href="~/User/ChangePassword" style="font-size:12px">Change | </a>
                             </span>
 
                             <div class="clearfix"></div>

@@ -1,1 +1,1 @@
-var settingsManager = { "websiteURL": "http://localhost/KioskWebApp/" };
+var settingsManager = {"websiteURL": "http://localhost/KioskWebApp/"};

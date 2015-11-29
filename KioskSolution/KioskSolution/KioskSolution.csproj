@@ -178,6 +178,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoleAPIController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SystemAPIController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\UserAPIController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -185,6 +187,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CardRequestModel.cs" />
+    <Compile Include="Models\ModelStateValidation.cs" />
     <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\SystemModel.cs" />
     <Compile Include="Models\TokenModel.cs" />
@@ -533,6 +536,11 @@
     <Content Include="Views\Customer\CustomerCardRequest.cshtml" />
     <Content Include="Views\Customer\CustomerCardRequestReport.cshtml" />
     <Content Include="Views\Customer\ConfirmToken.cshtml" />
+    <Content Include="Views\System\Configuration.cshtml" />
+    <Content Include="Views\System\InternalServerError.cshtml" />
+    <Content Include="Views\System\NotFoundError.cshtml" />
+    <Content Include="Views\System\SystemConfiguration.cshtml" />
+    <Content Include="Views\System\UnAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KioskSolutionLibrary\KioskSolutionLibrary.csproj">

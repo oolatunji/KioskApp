@@ -11,6 +11,34 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CardRequests">
+      <EntityTypeMapping TypeName="KioskWebDB.CardRequest">
+        <MappingFragment StoreEntitySet="CardRequest">
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="EncryptedPan" ColumnName="EncryptedPan" />
+          <ScalarProperty Name="HashedPan" ColumnName="HashedPan" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RequestType" ColumnName="RequestType" />
+          <ScalarProperty Name="PickupBranchID" ColumnName="PickupBranchID" />
+          <ScalarProperty Name="CardType" ColumnName="CardType" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="KioskWebDB.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="Othernames" ColumnName="Othernames" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Functions">
       <EntityTypeMapping TypeName="KioskWebDB.Function">
         <MappingFragment StoreEntitySet="Functions">
@@ -53,34 +81,6 @@
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Othernames" ColumnName="Othernames" />
           <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="KioskWebDB.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-          <ScalarProperty Name="Othernames" ColumnName="Othernames" />
-          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CardRequests">
-      <EntityTypeMapping TypeName="KioskWebDB.CardRequest">
-        <MappingFragment StoreEntitySet="CardRequest">
-          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-          <ScalarProperty Name="EncryptedPan" ColumnName="EncryptedPan" />
-          <ScalarProperty Name="HashedPan" ColumnName="HashedPan" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="RequestType" ColumnName="RequestType" />
-          <ScalarProperty Name="PickupBranchID" ColumnName="PickupBranchID" />
-          <ScalarProperty Name="CardType" ColumnName="CardType" />
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

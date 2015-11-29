@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CardIssuanceKIOSKModelStoreContainer" CdmEntityContainer="CardIssuanceKIOSKEntities">
+    <EntitySetMapping Name="CardAccountRequests">
+      <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.CardAccountRequest">
+        <MappingFragment StoreEntitySet="CardAccountRequests">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
+          <ScalarProperty Name="PAN" ColumnName="PAN" />
+          <ScalarProperty Name="PrintStatus" ColumnName="PrintStatus" />
+          <ScalarProperty Name="UserPrinting" ColumnName="UserPrinting" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="printedName" ColumnName="printedName" />
+          <ScalarProperty Name="HolderIDNumber" ColumnName="HolderIDNumber" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="HolderAddress" ColumnName="HolderAddress" />
+          <ScalarProperty Name="HolderPhoto" ColumnName="HolderPhoto" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="OtherName" ColumnName="OtherName" />
+          <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="UtilityBill" ColumnName="UtilityBill" />
+          <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CardAccountRequests_UBA">
+      <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.CardAccountRequests_UBA">
+        <MappingFragment StoreEntitySet="CardAccountRequests_UBA">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
+          <ScalarProperty Name="PAN" ColumnName="PAN" />
+          <ScalarProperty Name="PrintStatus" ColumnName="PrintStatus" />
+          <ScalarProperty Name="UserPrinting" ColumnName="UserPrinting" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+          <ScalarProperty Name="printedName" ColumnName="printedName" />
+          <ScalarProperty Name="HolderIDNumber" ColumnName="HolderIDNumber" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="HolderAddress" ColumnName="HolderAddress" />
+          <ScalarProperty Name="HolderPhoto" ColumnName="HolderPhoto" />
+          <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HubMasters">
+      <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.HubMaster">
+        <MappingFragment StoreEntitySet="HubMaster">
+          <ScalarProperty Name="hubID" ColumnName="hubID" />
+          <ScalarProperty Name="hubName" ColumnName="hubName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PANDetailsolds">
+      <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.PANDetailsold">
+        <MappingFragment StoreEntitySet="PANDetailsold">
+          <ScalarProperty Name="PAN" ColumnName="PAN" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrinterTypeDetails">
+      <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.PrinterTypeDetail">
+        <MappingFragment StoreEntitySet="PrinterTypeDetails">
+          <ScalarProperty Name="idNumber" ColumnName="idNumber" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="OfficialEmail" ColumnName="OfficialEmail" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTPDetails">
+      <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.OTPDetail">
+        <MappingFragment StoreEntitySet="OTPDetails">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="PAN" ColumnName="PAN" />
+          <ScalarProperty Name="OTP" ColumnName="OTP" />
+          <ScalarProperty Name="DateofOTP" ColumnName="DateofOTP" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PANDetails">
+      <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.PANDetail">
+        <MappingFragment StoreEntitySet="PANDetails">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="pan" ColumnName="pan" />
+          <ScalarProperty Name="seq_nr" ColumnName="seq_nr" />
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+          <ScalarProperty Name="account_number" ColumnName="account_number" />
+          <ScalarProperty Name="account_type" ColumnName="account_type" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

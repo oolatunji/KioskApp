@@ -23,6 +23,14 @@ namespace KioskSolution.Models
         [Required]
         public string DatabasePassword { get; set; }
         [Required]
+        public string DatabaseServerThirdParty { get; set; }
+        [Required]
+        public string DatabaseNameThirdParty { get; set; }
+        [Required]
+        public string DatabaseUserThirdParty { get; set; }
+        [Required]
+        public string DatabasePasswordThirdParty { get; set; }
+        [Required]
         public string FromEmailAddress { get; set; }
         [Required]
         public string SmtpUsername { get; set; }
@@ -32,9 +40,5 @@ namespace KioskSolution.Models
         public string SmtpHost { get; set; }
         [Required]
         public string SmtpPort { get; set; }
-        [Required]
-        public bool UseSmartCardAuthentication { get; set; }
-        [Required]
-        public Int32 PrinterFeedsPollingTime { get; set; }
     }
 }

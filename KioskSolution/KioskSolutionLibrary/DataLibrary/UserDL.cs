@@ -139,7 +139,6 @@ namespace KioskSolutionLibrary.DataLibrary
                 using (var context = new KioskWebDBEntities())
                 {
                     var users = context.Users
-                                        .Include("Role.RoleFunctions.Function")
                                         .Where(f => f.Username == username && f.HashedPassword == hashedPassword);
 
                     return users.FirstOrDefault();
