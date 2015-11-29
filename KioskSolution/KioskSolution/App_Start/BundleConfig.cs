@@ -21,7 +21,7 @@ namespace KioskSolution
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/jquery-ui.min.js",
                       "~/Scripts/moment.min.js",
-                      "~/Scripts/lodash.js",
+                      "~/Scripts/lodash.min.js",
                       "~/Scripts/fullcalendar.min.js",
                       "~/Scripts/jquery.rateit.min.js",
                       "~/Scripts/jquery.prettyPhoto.js",
@@ -41,7 +41,18 @@ namespace KioskSolution
                       "~/Scripts/bootstrap-datetimepicker.min.js",
                       "~/Scripts/jquery.onoff.min.js",
                       "~/Scripts/filter.js",
-                      "~/Scripts/custom.js"));
+                      "~/Scripts/custom.js",
+                      "~/Scripts/Utility/configFile.js",
+                      "~/Scripts/Utility/messageBox.js",
+                      "~/Scripts/Utility/flexiAppsCustomFormValidation.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/addfunctions").Include(
+                      "~/Scripts/Function/AddFunction.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/viewfunctions").Include(
+                     "~/Scripts/Function/ViewFunction.js"
+                     ));  
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
@@ -53,12 +64,10 @@ namespace KioskSolution
                       "~/Content/bootstrap-datetimepicker.min.css",
                       "~/Content/jquery.cleditor.css",
                        "~/Content/jquery.dataTables.min.css",
-                      "~/Content/dataTables.bootstrap.min.css",
                       "~/Content/dataTables.tableTools.css",
                       "~/Content/jquery.onoff.css",
                       "~/Content/style.css",
-                      "~/Content/widgets.css",
-                      "~/Content/site.css"));
+                      "~/Content/widgets.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

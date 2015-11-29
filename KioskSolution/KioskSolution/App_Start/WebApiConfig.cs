@@ -16,9 +16,6 @@ namespace KioskSolution
             // Web API configuration and services
 
             // Web API routes
-            config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

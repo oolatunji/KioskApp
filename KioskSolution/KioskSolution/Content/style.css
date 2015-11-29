@@ -13,6 +13,21 @@ body{
 	-webkit-font-smoothing: antialiased;
 }
 
+input:invalid {
+  border: 1px solid red;
+}
+
+input:valid {
+  border: 1px solid green;
+}
+
+select:invalid {
+  border: 1px solid red;
+}
+
+select:valid {
+  border: 1px solid green;
+}
 
 h1,h2,h3,h4,h5,h6{
 	padding: 2px 0px;

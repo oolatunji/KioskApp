@@ -1,4 +1,3 @@
-C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\obj\Debug\KioskSolution.csprojResolveAssemblyReference.cache
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\KioskSolution.dll.config
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\KioskSolution.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\KioskSolution.pdb
@@ -43,5 +42,6 @@ C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Sy
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\System.Web.WebPages.Deployment.xml
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\System.Web.WebPages.Razor.xml
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\bin\Antlr3.Runtime.pdb
+C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\obj\Debug\KioskSolution.csprojResolveAssemblyReference.cache
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\obj\Debug\KioskSolution.dll
 C:\Users\OLATUNJI\Documents\projects\KioskApp\KioskSolution\KioskSolution\obj\Debug\KioskSolution.pdb
