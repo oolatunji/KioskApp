@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace KioskSolutionLibrary.ModelLibrary
+namespace KioskSolutionLibrary
 {
     public class MailHelper : ConfigurationSection
     {

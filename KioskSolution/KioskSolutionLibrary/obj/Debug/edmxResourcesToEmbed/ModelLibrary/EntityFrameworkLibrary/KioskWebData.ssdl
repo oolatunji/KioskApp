@@ -47,7 +47,6 @@
     <Property Name="Username" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="UserRole" Type="bigint" />
     <Property Name="HashedPassword" Type="nvarchar" MaxLength="255" />
-    <Property Name="SmartCardID" Type="bigint" />
     <Property Name="UserBranch" Type="bigint" />
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="FirstTime" Type="bit" />

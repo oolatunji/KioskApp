@@ -1,17 +1,17 @@
 ﻿$(document).ready(function () {
     try {
 
-        var currentUrl = window.location.href;
-        var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
-        var userFunctions = user.Function;
+        //var currentUrl = window.location.href;
+        //var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
+        //var userFunctions = user.Function;
 
-        var exist = false;
-        $.each(userFunctions, function (key, userfunction) {
-            var link = settingsManager.websiteURL.trimRight('/') + userfunction.PageLink;
-            if (currentUrl == link) {
-                exist = true;
-            }
-        });
+        var exist = true;
+        //$.each(userFunctions, function (key, userfunction) {
+        //    var link = settingsManager.websiteURL.trimRight('/') + userfunction.PageLink;
+        //    if (currentUrl == link) {
+        //        exist = true;
+        //    }
+        //});
 
         if (!exist)
             window.location.href = '../System/UnAuthorized';
@@ -38,7 +38,7 @@
                     });
                 },
                 error: function (xhr) {
-                    displayMessage("error", 'Error experienced: ' + xhr.responseText, "User Management");
+                    displayMessage("error", 'Error experienced: ' + xhr.responseText);
                 }
             });
 
@@ -59,12 +59,12 @@
                     });
                 },
                 error: function (xhr) {
-                    displayMessage("error", 'Error experienced: ' + xhr.responseText, "User Management");
+                    displayMessage("error", 'Error experienced: ' + xhr.responseText);
                 }
             });
         }
     } catch (err) {
-        displayMessage("error", "Error encountered: " + err, "User Management");
+        displayMessage("error", "Error encountered: " + err);
     }
 });
 
@@ -78,49 +78,55 @@ String.prototype.trimRight = function (charlist) {
 function addUser() {
     try {
 
-        $('#addBtn').html('<i class="fa fa-spinner fa-spin"></i> Adding...');
-        $("#addBtn").attr("disabled", "disabled");
+        var err = genericFormValidation();
+        if (_.isEmpty(err)) {
 
-        var lastname = $('#lastname').val();
-        var othernames = $('#othernames').val();
-        var gender = $('#gender').val();
-        var phoneNumber = $('#phoneNumber').val();
-        var email = $('#emailAddress').val();
-        var username = $('#username').val();
-        var userRole = $('#userRole').val();
-        var userBranch = $('#userBranch').val();
+            $('#addBtn').html('<i class="fa fa-spinner fa-spin"></i> Adding...');
+            $("#addBtn").attr("disabled", "disabled");
+
+            var lastname = $('#lastname').val();
+            var othernames = $('#othernames').val();
+            var gender = $('#gender').val();
+            var phoneNumber = $('#phoneNumber').val();
+            var email = $('#emailAddress').val();
+            var username = $('#username').val();
+            var userRole = $('#userRole').val();
+            var userBranch = $('#userBranch').val();
 
 
-        var data = { Lastname: lastname, Othernames: othernames, Gender: gender, PhoneNumber: phoneNumber, Email: email, Username: username, UserRole: userRole, UserBranch: userBranch};
-        $.ajax({
-            url: settingsManager.websiteURL + 'api/UserAPI/SaveUser',
-            type: 'POST',
-            data: data,
-            processData: true,
-            async: true,
-            cache: false,
-            success: function (response) {
-                displayMessage("success", response, "User Management");
-                $('#lastname').val('');
-                $('#othernames').val('');
-                $('#gender').val('');
-                $('#phoneNumber').val('');
-                $('#emailAddress').val('');
-                $('#username').val('');
-                $('#userRole').val('');
-                $('#userBranch').val('');
+            var data = { Lastname: lastname, Othernames: othernames, Gender: gender, PhoneNumber: phoneNumber, Email: email, Username: username, UserRole: userRole, UserBranch: userBranch };
+            $.ajax({
+                url: settingsManager.websiteURL + 'api/UserAPI/SaveUser',
+                type: 'POST',
+                data: data,
+                processData: true,
+                async: true,
+                cache: false,
+                success: function (response) {
+                    displayMessage("success", response, "User Management");
+                    $('#lastname').val('');
+                    $('#othernames').val('');
+                    $('#gender').val('');
+                    $('#phoneNumber').val('');
+                    $('#emailAddress').val('');
+                    $('#username').val('');
+                    $('#userRole').val('');
+                    $('#userBranch').val('');
 
-                $("#addBtn").removeAttr("disabled");
-                $('#addBtn').html('<i class="fa fa-cog"></i> Add');
-            },
-            error: function (xhr) {
-                displayMessage("error", 'Error experienced: ' + xhr.responseText, "User Management");
-                $("#addBtn").removeAttr("disabled");
-                $('#addBtn').html('<i class="fa fa-cog"></i> Add');
-            }
-        });
+                    $("#addBtn").removeAttr("disabled");
+                    $('#addBtn').html('<i class="fa fa-cog"></i> Add');
+                },
+                error: function (xhr) {
+                    displayMessage("error", 'Error experienced: ' + xhr.responseText);
+                    $("#addBtn").removeAttr("disabled");
+                    $('#addBtn').html('<i class="fa fa-cog"></i> Add');
+                }
+            });
+        } else {
+            displayMessage("error", 'Error experienced: ' + err);
+        }
     } catch (err) {
-        displayMessage("error", "Error encountered: " + err, "User Management");
+        displayMessage("error", "Error encountered: " + err);
         $("#addBtn").removeAttr("disabled");
         $('#addBtn').html('<i class="fa fa-cog"></i> Add');
     }

@@ -1,16 +1,16 @@
 ﻿$(document).ready(function () {
     try {
-        var currentUrl = window.location.href;
-        var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
-        var userFunctions = user.Function;
+        //var currentUrl = window.location.href;
+        //var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
+        //var userFunctions = user.Function;
 
-        var exist = false;
-        $.each(userFunctions, function (key, userfunction) {
-            var link = settingsManager.websiteURL.trimRight('/') + userfunction.PageLink;
-            if (currentUrl == link) {
-                exist = true;
-            }
-        });
+        var exist = true;
+        //$.each(userFunctions, function (key, userfunction) {
+        //    var link = settingsManager.websiteURL.trimRight('/') + userfunction.PageLink;
+        //    if (currentUrl == link) {
+        //        exist = true;
+        //    }
+        //});
 
         if (!exist)
             window.location.href = '../System/UnAuthorized';
@@ -52,17 +52,17 @@ function getRolesBranchAndDisplayUsers() {
                         getUsers(roles, branches);
                     },
                     error: function (xhr) {
-                        displayMessage("error", 'Error experienced: ' + xhr.responseText, "User Management");
+                        displayMessage("error", 'Error experienced: ' + xhr.responseText);
                     }
                 });
 
             },
             error: function (xhr) {
-                displayMessage("error", 'Error experienced: ' + xhr.responseText, "User Management");
+                displayMessage("error", 'Error experienced: ' + xhr.responseText);
             }
         });
     } catch (err) {
-        displayMessage("error", "Error encountered: " + err, "User Management");
+        displayMessage("error", "Error encountered: " + err);
     }
 }
 
@@ -104,7 +104,6 @@ function getUsers(roles, branches) {
                 { "data": "Username" },
                 { "data": "Role.Name" },
                 { "data": "Branch.Name" },
-                { "data": "SmartCardID" },
                 {
                     "data": "Gender",
                     "visible": false
@@ -140,25 +139,25 @@ function getUsers(roles, branches) {
             "sDom": 'T<"clear">lrtip',
 
             "oTableTools": {
-                "sSwfPath": settingsManager.websiteURL + "images/copy_csv_xls_pdf.swf",
+                "sSwfPath": settingsManager.websiteURL + "img/copy_csv_xls_pdf.swf",
                 "aButtons": [
                     {
                         "sExtends": "copy",
                         "sButtonText": "Copy to Clipboard",
                         "oSelectorOpts": { filter: 'applied', order: 'current' },
-                        "mColumns": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                        "mColumns": [2, 3, 4, 5, 6, 7, 8, 9, 10]
                     },
                     {
                         "sExtends": "csv",
                         "sButtonText": "Save to CSV",
                         "oSelectorOpts": { filter: 'applied', order: 'current' },
-                        "mColumns": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                        "mColumns": [2, 3, 4, 5, 6, 7, 8, 9, 10]
                     },
                     {
                         "sExtends": "xls",
                         "sButtonText": "Save for Excel",
                         "oSelectorOpts": { filter: 'applied', order: 'current' },
-                        "mColumns": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                        "mColumns": [2, 3, 4, 5, 6, 7, 8, 9, 10]
                     }
                 ]
             }
@@ -228,18 +227,18 @@ $(document).ready(function () {
 });
 
 function format(d, roles, branches) {
-    var table = '<table width="100%" class="cell-border" cellpadding="5" cellspacing="0" border="2" style="padding-left:50px;">';
+    var table = '<form><table width="100%" class="cell-border" cellpadding="5" cellspacing="0" border="2" style="padding-left:50px;">';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Lastname:</td>';
-    table += '<td><input class="form-control" placeholder="Enter Lastname" id="lastname" value="' + d.Lastname + '"/></td>';
+    table += '<td><input class="form-control" title="Lastname" placeholder="Enter Lastname" id="lastname" value="' + d.Lastname + '" required/></td>';
     table += '</tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Othernames:</td>';
-    table += '<td><input class="form-control" placeholder="Enter Othernames" id="othernames" value="' + d.Othernames + '"/></td>';
+    table += '<td><input class="form-control" title="Othernames" placeholder="Enter Othernames" id="othernames" value="' + d.Othernames + '" required/></td>';
     table += '</tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Gender:</td>';
-    table += '<td><select class="form-control" name="gender" id="gender">';
+    table += '<td><select class="form-control" title="Gender" id="gender" required>';
     table += '<option value="">Select Gender</option>';
     if (d.Gender == "Male") {
         table += '<option selected="selected" value="Male">Male</option>';
@@ -252,15 +251,15 @@ function format(d, roles, branches) {
     table += '</select></td></tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Phone Number:</td>';
-    table += '<td><input class="form-control" placeholder="Enter Phone Number" id="phonenumber" value="' + d.PhoneNumber + '"/></td>';
+    table += '<td><input class="form-control" title="Phone Number" placeholder="Enter Phone Number" id="phonenumber" value="' + d.PhoneNumber + '" required/></td>';
     table += '</tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Email:</td>';
-    table += '<td><input class="form-control" placeholder="Enter Email" id="email" value="' + d.Email + '"/></td>';
+    table += '<td><input class="form-control" title="Email Address" placeholder="Enter Email" id="email" value="' + d.Email + '" required/></td>';
     table += '</tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Role:</td>';
-    table += '<td><select class="form-control" name="role" id="role">';
+    table += '<td><select class="form-control" title="User Role" id="role" required>';
     table += '<option value="">Select Role</option>';
     $.each(roles, function (key, value) {
         if (d.Role.ID == value.ID)
@@ -271,7 +270,7 @@ function format(d, roles, branches) {
     table += '</select></td></tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Arial;">Branch:</td>';
-    table += '<td><select class="form-control" name="branch" id="branch">';
+    table += '<td><select class="form-control" title="User Branch" name="branch" id="branch" required>';
     table += '<option value="">Select Branch</option>';
     $.each(branches, function (key, value) {
         if (d.Branch.ID == value.ID)
@@ -290,9 +289,9 @@ function format(d, roles, branches) {
     table += '</tr>';
     table += '<tr>';
     table += '<td style="color:navy;width:20%;font-family:Calibri;"></td>';
-    table += '<td><button type="button"  id="updateBtn" class="btn btn-red" style="float:right;" onclick="update();"><i class="fa fa-cog"></i> Update</button></td>';
+    table += '<td><button type="button"  id="updateBtn" class="btn btn-primary" style="float:right;" onclick="update();"><i class="fa fa-cog"></i> Update</button></td>';
     table += '</tr>';
-    table += '</table>';
+    table += '</table></form>';
 
     return table;
 }
@@ -321,42 +320,47 @@ function formatDetails(d) {
 
 function update() {
     try {
-        $('#updateBtn').html('<i class="fa fa-spinner fa-spin"></i> Updating...');
-        $("#updateBtn").attr("disabled", "disabled");
+        var err = genericFormValidation();
+        if (_.isEmpty(err)) {
+            $('#updateBtn').html('<i class="fa fa-spinner fa-spin"></i> Updating...');
+            $("#updateBtn").attr("disabled", "disabled");
 
-        var lastname = $('#lastname').val();
-        var othernames = $('#othernames').val();
-        var gender = $('#gender').val();
-        var phonenumber = $('#phonenumber').val();
-        var email = $('#email').val();
-        var userRole = $('#role').val();
-        var userBranch = $('#branch').val();
-        var username = $('#username').val();
-        var id = $('#id').val();
+            var lastname = $('#lastname').val();
+            var othernames = $('#othernames').val();
+            var gender = $('#gender').val();
+            var phonenumber = $('#phonenumber').val();
+            var email = $('#email').val();
+            var userRole = $('#role').val();
+            var userBranch = $('#branch').val();
+            var username = $('#username').val();
+            var id = $('#id').val();
 
-        var data = { Lastname: lastname, Othernames: othernames, Gender: gender, PhoneNumber: phonenumber, Email: email, Username: username, UserRole: userRole, UserBranch: userBranch, ID:id };
+            var data = { Lastname: lastname, Othernames: othernames, Gender: gender, PhoneNumber: phonenumber, Email: email, Username: username, UserRole: userRole, UserBranch: userBranch, ID: id };
 
-        $.ajax({
-            url: settingsManager.websiteURL + 'api/UserAPI/UpdateUser',
-            type: 'PUT',
-            data: data,
-            processData: true,
-            async: true,
-            cache: false,
-            success: function (response) {
-                displayMessage("success", response, "User Management");
-                getRolesBranchAndDisplayUsers();
-                $("#updateBtn").removeAttr("disabled");
-                $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
-            },
-            error: function (xhr) {
-                displayMessage("error", 'Error experienced: ' + xhr.responseText, "User Management");
-                $("#updateBtn").removeAttr("disabled");
-                $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
-            }
-        });
+            $.ajax({
+                url: settingsManager.websiteURL + 'api/UserAPI/UpdateUser',
+                type: 'PUT',
+                data: data,
+                processData: true,
+                async: true,
+                cache: false,
+                success: function (response) {
+                    displayMessage("success", response, "User Management");
+                    getRolesBranchAndDisplayUsers();
+                    $("#updateBtn").removeAttr("disabled");
+                    $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
+                },
+                error: function (xhr) {
+                    displayMessage("error", 'Error experienced: ' + xhr.responseText);
+                    $("#updateBtn").removeAttr("disabled");
+                    $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
+                }
+            });
+        } else {
+            displayMessage("error", 'Error experienced: ' + err);
+        }
     } catch (err) {
-        displayMessage("error", "Error encountered: " + err, "User Management");
+        displayMessage("error", "Error encountered: " + err);
         $("#updateBtn").removeAttr("disabled");
         $('#updateBtn').html('<i class="fa fa-cog"></i> Update');
     }

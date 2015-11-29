@@ -23,7 +23,6 @@ namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary
         public string Username { get; set; }
         public Nullable<long> UserRole { get; set; }
         public string HashedPassword { get; set; }
-        public Nullable<long> SmartCardID { get; set; }
         public Nullable<long> UserBranch { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<bool> FirstTime { get; set; }
