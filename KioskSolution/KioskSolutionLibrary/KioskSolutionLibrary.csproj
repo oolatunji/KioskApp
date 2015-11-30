@@ -56,6 +56,7 @@
     <Compile Include="DataLibrary\CustomerDL.cs" />
     <Compile Include="DataLibrary\FunctionDL.cs" />
     <Compile Include="DataLibrary\RoleDL.cs" />
+    <Compile Include="DataLibrary\ThirdPartyDL.cs" />
     <Compile Include="DataLibrary\UserDL.cs" />
     <Compile Include="ModelLibrary\EntityFrameworkLibrary\Branch.cs">
       <DependentUpon>KioskWebData.tt</DependentUpon>
@@ -144,6 +145,7 @@
     <Compile Include="ProcessLibrary\CustomerPL.cs" />
     <Compile Include="ProcessLibrary\FunctionPL.cs" />
     <Compile Include="ProcessLibrary\RolePL.cs" />
+    <Compile Include="ProcessLibrary\ThirdPartyPL.cs" />
     <Compile Include="ProcessLibrary\UserPL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

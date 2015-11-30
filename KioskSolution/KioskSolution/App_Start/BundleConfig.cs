@@ -125,6 +125,14 @@ namespace KioskSolution
                     "~/Scripts/Password/PasswordReset.js"
                     ));
 
+            bundles.Add(new ScriptBundle("~/bundles/addpan").Include(
+                      "~/Scripts/Pan/AddPan.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/viewpan").Include(
+                      "~/Scripts/Pan/ViewPan.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/font-awesome.min.css",

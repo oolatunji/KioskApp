@@ -91,7 +91,7 @@ namespace KioskSolutionLibrary.ModelLibrary
 
         }
 
-        public static void SendCardRequest(Customer customer, string token)
+        public static void SendCardRequestToken(Customer customer, string token)
         {
             try
             {
@@ -136,6 +136,72 @@ namespace KioskSolutionLibrary.ModelLibrary
                 Thread email = new Thread(delegate()
                 {
                     Mail.SendMail(customer.EmailAddress, fromAddress, subject, body, smtpHost, smtpPort, smtpUseDefaultCredentials, smtpUsername, smtpPassword, smtpEnableSsl);
+
+                });
+
+                email.IsBackground = true;
+                email.Start();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex);
+                throw ex;
+            }
+
+        }
+
+        public static void SendCardPickup(CardRequest cardRequest)
+        {
+            try
+            {
+
+                string userFullName = cardRequest.Customer.Lastname + " " + cardRequest.Customer.Othernames;
+                string organization = System.Configuration.ConfigurationManager.AppSettings.Get("Organization");
+                string applicationName = System.Configuration.ConfigurationManager.AppSettings.Get("ApplicationName");
+                string subject = "Welcome to " + applicationName;
+                string fromAddress = "";
+                string smtpUsername = "";
+                string smtpPassword = "";
+                string smtpHost = "";
+                Int32 smtpPort = 587;
+                bool smtpUseDefaultCredentials = false;
+                bool smtpEnableSsl = true;
+
+                MailHelper mailConfig = ConfigurationManager.GetSection("mailHelperSection") as MailHelper;
+                if (mailConfig != null && mailConfig.Mail != null)
+                {
+                    fromAddress = mailConfig.Mail.FromEmailAddress;
+                    smtpUsername = mailConfig.Mail.Username;
+                    smtpPassword = mailConfig.Mail.Password;
+                }
+
+                if (mailConfig != null && mailConfig.Smtp != null)
+                {
+                    smtpHost = mailConfig.Smtp.Host;
+                    smtpPort = Convert.ToInt32(mailConfig.Smtp.Port);
+                    smtpUseDefaultCredentials = Convert.ToBoolean(mailConfig.Smtp.UseDefaultCredentials);
+                    smtpEnableSsl = Convert.ToBoolean(mailConfig.Smtp.EnableSsl);
+                }
+
+
+                string body = "";
+
+                if (cardRequest.RequestType == StatusUtil.RequestType.WithoutSerialNumber.ToString())
+                    body = System.IO.File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/MailTemplates/CardPickUp.txt"));
+                else
+                {
+                    body = System.IO.File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/MailTemplates/CardPickUpSerialNumber.txt"));
+                    body = body.Replace("#SerialNumber", cardRequest.SerialNumber);
+                }
+                body = body.Replace("#Organization", organization);
+                body = body.Replace("#ApplicationName", applicationName);
+                body = body.Replace("#UserFullName", userFullName);
+                body = body.Replace("#PickUpBranch", cardRequest.Branch.Name);
+
+                Thread email = new Thread(delegate()
+                {
+                    Mail.SendMail(cardRequest.Customer.EmailAddress, fromAddress, subject, body, smtpHost, smtpPort, smtpUseDefaultCredentials, smtpUsername, smtpPassword, smtpEnableSsl);
 
                 });
 

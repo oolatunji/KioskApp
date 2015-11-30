@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="KioskWebDBEntities-Web.config Connection String" description="KioskWebDBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/ModelLibrary.EntityFrameworkLibrary.KioskWebData.csdl|res://*/ModelLibrary.EntityFrameworkLibrary.KioskWebData.ssdl|res://*/ModelLibrary.EntityFrameworkLibrary.KioskWebData.msl;provider=System.Data.SqlClient;provider connection string='data source=.\sqlexpress;initial catalog=KioskWebDB;user id=sa;password=root;MultipleActiveResultSets=True;App=EntityFramework'" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\OLATUNJI\\Documents\\projects\\KioskApp\\KioskSolution\\KioskSolution\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='KioskWebDBEntities']/@connectionString" />
+  </parameter>
+  <parameter name="CardIssuanceKIOSKEntities-Web.config Connection String" description="CardIssuanceKIOSKEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.CardIssuanceKIOSKData.csdl|res://*/ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.CardIssuanceKIOSKData.ssdl|res://*/ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.CardIssuanceKIOSKData.msl;provider=System.Data.SqlClient;provider connection string='data source=.\sqlexpress;initial catalog=CardIssuanceKIOSK;user id=sa;password=root;MultipleActiveResultSets=True;App=EntityFramework'" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\OLATUNJI\\Documents\\projects\\KioskApp\\KioskSolution\\KioskSolution\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CardIssuanceKIOSKEntities']/@connectionString" />
+  </parameter>
+</parameters>

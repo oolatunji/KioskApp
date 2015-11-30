@@ -58,6 +58,22 @@ namespace KioskSolution.Controllers
             }
         }
 
+        [HttpPut]
+        public HttpResponseMessage UpdateCardRequest([FromBody]TempModel model)
+        {
+            try
+            {
+                bool result = CustomerPL.UpdateCardRequest(model.CardRequestID, model.RequestType, model.LoggedInUsername);
+                return result.Equals(true) ? Request.CreateResponse(HttpStatusCode.OK, "Customer card request approved successfully") : Request.CreateResponse(HttpStatusCode.BadRequest, "Request failed");
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex);
+                var response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                return response;
+            }
+        }
+
         [HttpGet]
         public HttpResponseMessage RetrieveCustomers()
         {
@@ -121,11 +137,12 @@ namespace KioskSolution.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage RetrieveCardRequests()
+        [Route("api/CustomerAPI/RetrieveCardRequests/{branchID}")]
+        public HttpResponseMessage RetrieveCardRequests(long branchID)
         {
             try
             {
-                IEnumerable<Object> cardRequests = CustomerPL.RetrieveCardRequests();
+                IEnumerable<Object> cardRequests = CustomerPL.RetrieveCardRequests(branchID);
                 object returnedCardRequests = new { data = cardRequests };
                 return Request.CreateResponse(HttpStatusCode.OK, returnedCardRequests);
             }

@@ -62,13 +62,11 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.OTPDetails' does not have a 
     <Property Name="DateofOTP" Type="datetime" />
     <Property Name="Status" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="PANDetails">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="pan" Type="nvarchar" MaxLength="19" />
     <Property Name="seq_nr" Type="nvarchar" MaxLength="3" />
     <Property Name="expiry_date" Type="nvarchar" MaxLength="50" />
@@ -106,6 +104,7 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a 
     <EntitySet Name="CardAccountRequests" EntityType="Self.CardAccountRequests" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CardAccountRequests_UBA" EntityType="Self.CardAccountRequests_UBA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HubMaster" EntityType="Self.HubMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PANDetails" EntityType="Self.PANDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PANDetailsold" EntityType="Self.PANDetailsold" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PrinterTypeDetails" EntityType="Self.PrinterTypeDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -117,18 +116,6 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a 
     [OTPDetails].[DateofOTP] AS [DateofOTP], 
     [OTPDetails].[Status] AS [Status]
     FROM [dbo].[OTPDetails] AS [OTPDetails]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="PANDetails" EntityType="Self.PANDetails" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [PANDetails].[id] AS [id], 
-    [PANDetails].[pan] AS [pan], 
-    [PANDetails].[seq_nr] AS [seq_nr], 
-    [PANDetails].[expiry_date] AS [expiry_date], 
-    [PANDetails].[account_number] AS [account_number], 
-    [PANDetails].[account_type] AS [account_type], 
-    [PANDetails].[customer_id] AS [customer_id], 
-    [PANDetails].[Status] AS [Status]
-    FROM [dbo].[PANDetails] AS [PANDetails]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

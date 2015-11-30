@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="46e70cf713224277b1d8e45ccbea146c" Name="Diagram1">
-        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.CardAccountRequest" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.CardAccountRequests_UBA" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.HubMaster" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.PANDetailsold" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.PrinterTypeDetail" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.User" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.OTPDetail" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.PANDetail" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.CardAccountRequest" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.CardAccountRequests_UBA" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.HubMaster" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.PANDetail" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.PANDetailsold" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.PrinterTypeDetail" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.User" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CardIssuanceKIOSKModel.OTPDetail" Width="1.5" PointX="6.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

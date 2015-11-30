@@ -92,13 +92,13 @@ namespace KioskSolutionLibrary.ProcessLibrary
             }
         }
 
-        public static List<Object> RetrieveCardRequests()
+        public static List<Object> RetrieveCardRequests(long branchID)
         {
             try
             {
                 List<Object> returnedCardRequests = new List<object>();
 
-                List<CardRequest> cardRequests = CustomerDL.RetrieveCardRequest();
+                List<CardRequest> cardRequests = CustomerDL.RetrieveCardRequest(branchID);
 
                 foreach (CardRequest cardRequest in cardRequests)
                 {
@@ -146,7 +146,7 @@ namespace KioskSolutionLibrary.ProcessLibrary
                         returnedCustomer.customerID = customer.ID;
                         returnedCustomer.customerToken = token;
 
-                        Mail.SendCardRequest(customer, token);
+                        Mail.SendCardRequestToken(customer, token);
 
                         return returnedCustomer;
                     }
@@ -160,6 +160,37 @@ namespace KioskSolutionLibrary.ProcessLibrary
             {
                 throw ex;
             }
-        }     
+        }
+
+        public static bool UpdateCardRequest(long cardRequestID, string requestType, string loggedInUsername)
+        {
+            try
+            {
+                string clearPan = string.Empty;
+                CardRequest cardRequest = new CardRequest();
+                if (requestType == StatusUtil.RequestType.WithSerialNumber.ToString())
+                {
+                    List<KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.PANDetail> unusedPans = ThirdPartyDL.RetrieveUnUsedPanDetails();
+                    if (unusedPans.Count == 0)
+                    {
+                        throw new Exception("There are no available pans for linking");
+                    }
+                    else
+                    {
+                        clearPan = unusedPans.Take(1).First().pan;
+                    }
+                }
+                bool updated = CustomerDL.UpdateCardRequest(cardRequestID, clearPan, loggedInUsername, out cardRequest);
+                if(updated)
+                {
+                    Mail.SendCardPickup(cardRequest);
+                }
+                return updated;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

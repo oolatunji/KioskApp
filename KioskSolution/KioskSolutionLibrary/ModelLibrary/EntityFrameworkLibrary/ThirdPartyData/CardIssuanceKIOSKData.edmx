@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CardIssuanceKIOSKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CardIssuanceKIOSKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CardAccountRequests">
           <Key>
             <PropertyRef Name="id" />
@@ -67,13 +67,11 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.OTPDetails' does not have a 
           <Property Name="DateofOTP" Type="datetime" />
           <Property Name="Status" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PANDetails">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pan" Type="nvarchar" MaxLength="19" />
           <Property Name="seq_nr" Type="nvarchar" MaxLength="3" />
           <Property Name="expiry_date" Type="nvarchar" MaxLength="50" />
@@ -111,6 +109,7 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a 
           <EntitySet Name="CardAccountRequests" EntityType="Self.CardAccountRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CardAccountRequests_UBA" EntityType="Self.CardAccountRequests_UBA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HubMaster" EntityType="Self.HubMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PANDetails" EntityType="Self.PANDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PANDetailsold" EntityType="Self.PANDetailsold" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PrinterTypeDetails" EntityType="Self.PrinterTypeDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -123,30 +122,27 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a 
     [OTPDetails].[Status] AS [Status]
     FROM [dbo].[OTPDetails] AS [OTPDetails]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="PANDetails" EntityType="Self.PANDetails" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PANDetails].[id] AS [id], 
-    [PANDetails].[pan] AS [pan], 
-    [PANDetails].[seq_nr] AS [seq_nr], 
-    [PANDetails].[expiry_date] AS [expiry_date], 
-    [PANDetails].[account_number] AS [account_number], 
-    [PANDetails].[account_type] AS [account_type], 
-    [PANDetails].[customer_id] AS [customer_id], 
-    [PANDetails].[Status] AS [Status]
-    FROM [dbo].[PANDetails] AS [PANDetails]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CardIssuanceKIOSKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CardIssuanceKIOSKEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CardAccountRequests" EntityType="CardIssuanceKIOSKModel.CardAccountRequest" />
+          <EntitySet Name="CardAccountRequests_UBA" EntityType="CardIssuanceKIOSKModel.CardAccountRequests_UBA" />
+          <EntitySet Name="HubMasters" EntityType="CardIssuanceKIOSKModel.HubMaster" />
+          <EntitySet Name="PANDetails" EntityType="CardIssuanceKIOSKModel.PANDetail" />
+          <EntitySet Name="PANDetailsolds" EntityType="CardIssuanceKIOSKModel.PANDetailsold" />
+          <EntitySet Name="PrinterTypeDetails" EntityType="CardIssuanceKIOSKModel.PrinterTypeDetail" />
+          <EntitySet Name="Users" EntityType="CardIssuanceKIOSKModel.User" />
+          <EntitySet Name="OTPDetails" EntityType="CardIssuanceKIOSKModel.OTPDetail" />
+        </EntityContainer>
         <EntityType Name="CardAccountRequest">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameOnCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameOnCard" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PrintStatus" Type="Int32" />
           <Property Name="UserPrinting" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -169,7 +165,7 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a 
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameOnCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameOnCard" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PrintStatus" Type="Int32" />
           <Property Name="UserPrinting" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -189,28 +185,41 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a 
             <PropertyRef Name="hubID" />
           </Key>
           <Property Name="hubID" Type="Int32" Nullable="false" />
-          <Property Name="hubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hubName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PANDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pan" Type="String" MaxLength="19" FixedLength="false" Unicode="true" />
+          <Property Name="seq_nr" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="expiry_date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="account_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
         <EntityType Name="PANDetailsold">
           <Key>
             <PropertyRef Name="PAN" />
           </Key>
-          <Property Name="PAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PAN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" />
         </EntityType>
         <EntityType Name="PrinterTypeDetail">
           <Key>
             <PropertyRef Name="idNumber" />
           </Key>
-          <Property Name="idNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserName" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="OfficialEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -226,29 +235,6 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a 
           <Property Name="DateofOTP" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
         </EntityType>
-        <EntityType Name="PANDetail">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" />
-          <Property Name="pan" Type="String" MaxLength="19" FixedLength="false" Unicode="true" />
-          <Property Name="seq_nr" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="expiry_date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="account_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="account_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="customer_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityContainer Name="CardIssuanceKIOSKEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CardAccountRequests" EntityType="Self.CardAccountRequest" />
-          <EntitySet Name="CardAccountRequests_UBA" EntityType="Self.CardAccountRequests_UBA" />
-          <EntitySet Name="HubMasters" EntityType="Self.HubMaster" />
-          <EntitySet Name="PANDetailsolds" EntityType="Self.PANDetailsold" />
-          <EntitySet Name="PrinterTypeDetails" EntityType="Self.PrinterTypeDetail" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="OTPDetails" EntityType="Self.OTPDetail" />
-          <EntitySet Name="PANDetails" EntityType="Self.PANDetail" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -258,106 +244,106 @@ warning 6002: The table/view 'CardIssuanceKIOSK.dbo.PANDetails' does not have a 
           <EntitySetMapping Name="CardAccountRequests">
             <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.CardAccountRequest">
               <MappingFragment StoreEntitySet="CardAccountRequests">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
-                <ScalarProperty Name="PAN" ColumnName="PAN" />
-                <ScalarProperty Name="PrintStatus" ColumnName="PrintStatus" />
-                <ScalarProperty Name="UserPrinting" ColumnName="UserPrinting" />
-                <ScalarProperty Name="DATE" ColumnName="DATE" />
-                <ScalarProperty Name="printedName" ColumnName="printedName" />
-                <ScalarProperty Name="HolderIDNumber" ColumnName="HolderIDNumber" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="HolderAddress" ColumnName="HolderAddress" />
-                <ScalarProperty Name="HolderPhoto" ColumnName="HolderPhoto" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="OtherName" ColumnName="OtherName" />
-                <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-                <ScalarProperty Name="UtilityBill" ColumnName="UtilityBill" />
                 <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+                <ScalarProperty Name="UtilityBill" ColumnName="UtilityBill" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
+                <ScalarProperty Name="OtherName" ColumnName="OtherName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="HolderPhoto" ColumnName="HolderPhoto" />
+                <ScalarProperty Name="HolderAddress" ColumnName="HolderAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="HolderIDNumber" ColumnName="HolderIDNumber" />
+                <ScalarProperty Name="printedName" ColumnName="printedName" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="UserPrinting" ColumnName="UserPrinting" />
+                <ScalarProperty Name="PrintStatus" ColumnName="PrintStatus" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CardAccountRequests_UBA">
             <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.CardAccountRequests_UBA">
               <MappingFragment StoreEntitySet="CardAccountRequests_UBA">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
-                <ScalarProperty Name="PAN" ColumnName="PAN" />
-                <ScalarProperty Name="PrintStatus" ColumnName="PrintStatus" />
-                <ScalarProperty Name="UserPrinting" ColumnName="UserPrinting" />
-                <ScalarProperty Name="DATE" ColumnName="DATE" />
-                <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
-                <ScalarProperty Name="printedName" ColumnName="printedName" />
-                <ScalarProperty Name="HolderIDNumber" ColumnName="HolderIDNumber" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="HolderAddress" ColumnName="HolderAddress" />
-                <ScalarProperty Name="HolderPhoto" ColumnName="HolderPhoto" />
-                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+                <ScalarProperty Name="HolderPhoto" ColumnName="HolderPhoto" />
+                <ScalarProperty Name="HolderAddress" ColumnName="HolderAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="HolderIDNumber" ColumnName="HolderIDNumber" />
+                <ScalarProperty Name="printedName" ColumnName="printedName" />
+                <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="UserPrinting" ColumnName="UserPrinting" />
+                <ScalarProperty Name="PrintStatus" ColumnName="PrintStatus" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="NameOnCard" ColumnName="NameOnCard" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HubMasters">
             <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.HubMaster">
               <MappingFragment StoreEntitySet="HubMaster">
-                <ScalarProperty Name="hubID" ColumnName="hubID" />
                 <ScalarProperty Name="hubName" ColumnName="hubName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PANDetailsolds">
-            <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.PANDetailsold">
-              <MappingFragment StoreEntitySet="PANDetailsold">
-                <ScalarProperty Name="PAN" ColumnName="PAN" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PrinterTypeDetails">
-            <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.PrinterTypeDetail">
-              <MappingFragment StoreEntitySet="PrinterTypeDetails">
-                <ScalarProperty Name="idNumber" ColumnName="idNumber" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="OfficialEmail" ColumnName="OfficialEmail" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OTPDetails">
-            <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.OTPDetail">
-              <MappingFragment StoreEntitySet="OTPDetails">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="PAN" ColumnName="PAN" />
-                <ScalarProperty Name="OTP" ColumnName="OTP" />
-                <ScalarProperty Name="DateofOTP" ColumnName="DateofOTP" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="hubID" ColumnName="hubID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PANDetails">
             <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.PANDetail">
               <MappingFragment StoreEntitySet="PANDetails">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="pan" ColumnName="pan" />
-                <ScalarProperty Name="seq_nr" ColumnName="seq_nr" />
-                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
-                <ScalarProperty Name="account_number" ColumnName="account_number" />
-                <ScalarProperty Name="account_type" ColumnName="account_type" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="account_type" ColumnName="account_type" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="seq_nr" ColumnName="seq_nr" />
+                <ScalarProperty Name="pan" ColumnName="pan" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PANDetailsolds">
+            <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.PANDetailsold">
+              <MappingFragment StoreEntitySet="PANDetailsold">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrinterTypeDetails">
+            <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.PrinterTypeDetail">
+              <MappingFragment StoreEntitySet="PrinterTypeDetails">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="idNumber" ColumnName="idNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="OfficialEmail" ColumnName="OfficialEmail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OTPDetails">
+            <EntityTypeMapping TypeName="CardIssuanceKIOSKModel.OTPDetail">
+              <MappingFragment StoreEntitySet="OTPDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateofOTP" ColumnName="DateofOTP" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

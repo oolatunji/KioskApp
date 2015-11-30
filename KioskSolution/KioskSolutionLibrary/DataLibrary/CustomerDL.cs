@@ -1,4 +1,5 @@
-﻿using KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary;
+﻿using KioskSolutionLibrary.ModelLibrary;
+using KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -113,13 +114,14 @@ namespace KioskSolutionLibrary.DataLibrary
             }
         }
 
-        public static List<CardRequest> RetrieveCardRequest()
+        public static List<CardRequest> RetrieveCardRequest(long branchID)
         {
             try
             {
                 using (var context = new KioskWebDBEntities())
                 {
                     var cardRequests = context.CardRequests
+                                    .Where(x => x.PickupBranchID == branchID)
                                     .Include(cr => cr.Branch)
                                     .Include(cr => cr.Customer)
                                     .ToList();
@@ -143,6 +145,26 @@ namespace KioskSolutionLibrary.DataLibrary
                                             .Where(f => f.ID == customerID);
 
                     return customers.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static CardRequest RetrieveCardRequestByID(long? cardRequestID)
+        {
+            try
+            {
+                using (var context = new KioskWebDBEntities())
+                {
+                    var cardRequests = context.CardRequests
+                                            .Include(x => x.Customer)
+                                            .Include(x => x.Branch)
+                                            .Where(f => f.ID == cardRequestID);
+
+                    return cardRequests.FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -199,6 +221,77 @@ namespace KioskSolutionLibrary.DataLibrary
                 }
                 else
                 {
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static bool UpdateCardRequest(long cardRequestID, string clearPan, string loggedInUsername, out CardRequest cardRequest)
+        {
+            try
+            {
+                CardRequest existingRequest = new CardRequest();
+                using (var context = new KioskWebDBEntities())
+                {
+                    existingRequest = context.CardRequests
+                                    .Include(cr => cr.Customer)
+                                    .Include(cr => cr.Branch)
+                                    .Where(t => t.ID == cardRequestID)
+                                    .FirstOrDefault();
+                }
+
+                if (existingRequest != null)
+                {
+                    if (existingRequest.RequestType == StatusUtil.RequestType.WithSerialNumber.ToString())
+                    {
+                        existingRequest.HashedPan = PasswordHash.MD5Hash(clearPan);
+                        existingRequest.EncryptedPan = Crypter.Encrypt(System.Configuration.ConfigurationManager.AppSettings.Get("ekey"), clearPan);
+                    }
+                    existingRequest.Status = StatusUtil.CardStatus.Approved.ToString();
+                    
+                    using (var context = new KioskWebDBEntities())
+                    {
+                        using (var transaction = context.Database.BeginTransaction())
+                        {
+                            context.Entry(existingRequest).State = EntityState.Modified;
+                            context.SaveChanges();
+
+                            KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.User thirdPartyUser = ThirdPartyDL.RetrieveUserByUsername(loggedInUsername);
+
+                            KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.CardAccountRequest car = new ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.CardAccountRequest();
+
+                            car.NameOnCard = string.Format("{0} {1}", existingRequest.Customer.Lastname, existingRequest.Customer.Othernames);
+                            if (existingRequest.RequestType == StatusUtil.RequestType.WithSerialNumber.ToString())
+                                car.PAN = clearPan;
+                            car.PrintStatus = 1;
+                            car.UserPrinting = thirdPartyUser.id.ToString();
+                            car.DATE = System.DateTime.Now;
+                            if (existingRequest.RequestType == StatusUtil.RequestType.WithSerialNumber.ToString())
+                                car.HolderIDNumber = existingRequest.SerialNumber;
+                            car.PhoneNumber = existingRequest.Customer.PhoneNumber;
+                            car.LastName = existingRequest.Customer.Lastname;
+                            car.OtherName = existingRequest.Customer.Othernames;
+                            car.emailaddress = existingRequest.Customer.EmailAddress;
+                            car.Updateddate = System.DateTime.Now;
+                            ThirdPartyDL.SaveCar(car);
+
+                            ThirdPartyDL.UpdatePan(clearPan);
+                            
+
+                            transaction.Commit();
+                        }
+                    }
+                    cardRequest = existingRequest;
+                    return true;
+                }
+                else
+                {
+                    cardRequest = null;
                     return false;
                 }
 

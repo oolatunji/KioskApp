@@ -28,10 +28,10 @@ namespace KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyDat
         public virtual DbSet<CardAccountRequest> CardAccountRequests { get; set; }
         public virtual DbSet<CardAccountRequests_UBA> CardAccountRequests_UBA { get; set; }
         public virtual DbSet<HubMaster> HubMasters { get; set; }
+        public virtual DbSet<PANDetail> PANDetails { get; set; }
         public virtual DbSet<PANDetailsold> PANDetailsolds { get; set; }
         public virtual DbSet<PrinterTypeDetail> PrinterTypeDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<OTPDetail> OTPDetails { get; set; }
-        public virtual DbSet<PANDetail> PANDetails { get; set; }
     }
 }

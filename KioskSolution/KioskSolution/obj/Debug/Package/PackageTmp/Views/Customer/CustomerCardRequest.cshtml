@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Card Request</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/common_libraries")
+    @Scripts.Render("~/bundles/customercardrequest")
+</head>
+<body>
+
+    <!-- Form area -->
+    <div class="admin-form">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Widget starts -->
+                    <div class="widget worange">
+                        <!-- Widget head -->
+                        <div class="widget-head">
+                            <i class="fa fa-credit-card"></i> Request for Debit Card
+                        </div>
+
+                        <div class="widget-content">
+                            <div class="padd">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Request Type</label>
+                                        <div class="col-lg-9">
+                                            <select class="form-control" id="requestType" title="Request Type" required onchange="requestTypeOnChanged()">
+                                                <option value="">Select Request Type</option>
+                                                <option value="1">With Serial Number</option>
+                                                <option value="2">Without Serial Number</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hideControl" id="cardTypeBlock">
+                                        <label class="col-lg-3 control-label">Card Type</label>
+                                        <div class="col-lg-9">
+                                            <select class="form-control" id="cardType" title="Card Type" required>
+                                                <option value="">Select Card Type</option>
+                                                <option value="1">MasterCard</option>
+                                                <option value="2">Verve</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hideControl" id="accountBlock">
+                                        <label class="control-label col-lg-3" for="username">Account Number</label>
+                                        <div class="col-lg-9">
+                                            <input type="number" class="form-control" id="accountNumber" placeholder="Enter your account number" title="Account Number">
+                                        </div>
+                                    </div>
+                                    <div class="form-group hideControl" id="serialNumberBlock">
+                                        <label class="control-label col-lg-3" for="username">Serial Number</label>
+                                        <div class="col-lg-9">
+                                            <input type="number" class="form-control" id="serialNumber" placeholder="Enter your serial number" title="Serial Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <button id="addBtn" onclick="requestCard()" type="submit" class="btn btn-info btn-sm">Request</button>
+                                    </div>
+                                    <br />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="widget-foot">
+                            Request for your debit card.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

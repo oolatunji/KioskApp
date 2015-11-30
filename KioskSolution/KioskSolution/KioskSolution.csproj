@@ -176,10 +176,12 @@
     <Compile Include="Controllers\FunctionAPIController.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PanController.cs" />
     <Compile Include="Controllers\RoleAPIController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SystemAPIController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\ThirdPartyAPIController.cs" />
     <Compile Include="Controllers\UserAPIController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -190,10 +192,13 @@
     <Compile Include="Models\ModelStateValidation.cs" />
     <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\SystemModel.cs" />
+    <Compile Include="Models\TempModel.cs" />
     <Compile Include="Models\TokenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\MailTemplates\CardPickUp.txt" />
+    <Content Include="App_Data\MailTemplates\CardPickUPSerialNumber.txt" />
     <Content Include="App_Data\MailTemplates\CardRequest.txt" />
     <Content Include="App_Data\MailTemplates\ForgotPassword.txt" />
     <Content Include="App_Data\MailTemplates\mail.png" />
@@ -435,6 +440,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\KioskApp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Branch\AddBranch.js" />
     <Content Include="Scripts\Branch\ViewBranch.js" />
@@ -488,6 +494,8 @@
     <Content Include="Scripts\Login\Login.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\Pan\AddPan.js" />
+    <Content Include="Scripts\Pan\ViewPan.js" />
     <Content Include="Scripts\Password\ChangePassword.js" />
     <Content Include="Scripts\Password\ForgotPassword.js" />
     <Content Include="Scripts\Password\PasswordReset.js" />
@@ -541,6 +549,8 @@
     <Content Include="Views\System\NotFoundError.cshtml" />
     <Content Include="Views\System\SystemConfiguration.cshtml" />
     <Content Include="Views\System\UnAuthorized.cshtml" />
+    <Content Include="Views\Pan\AddPan.cshtml" />
+    <Content Include="Views\Pan\ViewPan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KioskSolutionLibrary\KioskSolutionLibrary.csproj">

@@ -1,4 +1,5 @@
-﻿using KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary;
+﻿using KioskSolutionLibrary.ModelLibrary;
+using KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,10 +20,28 @@ namespace KioskSolutionLibrary.DataLibrary
         {
             try
             {
+                string password = user.HashedPassword;
+                user.HashedPassword = PasswordHash.MD5Hash(password);
                 using (var context = new KioskWebDBEntities())
                 {
-                    context.Users.Add(user);
-                    context.SaveChanges();
+                    using (var transaction = context.Database.BeginTransaction())
+                    {
+                        context.Users.Add(user);
+                        context.SaveChanges();
+
+                        KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.User thirdPartyUser = new KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.User();
+
+                        thirdPartyUser.UserName = user.Username;
+                        thirdPartyUser.Password = password;
+                        thirdPartyUser.UserType = "1";
+                        thirdPartyUser.status = 1;
+                        thirdPartyUser.OfficialEmail = user.Email;
+
+                        if (!ThirdPartyDL.UserExists(thirdPartyUser))
+                            ThirdPartyDL.Save(thirdPartyUser);
+
+                        transaction.Commit();
+                    }
                 }
                 return true;
             }
@@ -75,10 +94,12 @@ namespace KioskSolutionLibrary.DataLibrary
             }
         }
 
-        public static bool ChangePassword(string username, string newHashedPassword)
+        public static bool ChangePassword(string username, string newPassword)
         {
             try
             {
+                string newHashedPassword = PasswordHash.MD5Hash(newPassword);
+
                 User existingUser = new User();
                 using (var context = new KioskWebDBEntities())
                 {
@@ -91,11 +112,22 @@ namespace KioskSolutionLibrary.DataLibrary
                 {
                     existingUser.HashedPassword = newHashedPassword;
                     existingUser.FirstTime = false;
+
                     using (var context = new KioskWebDBEntities())
                     {
-                        context.Entry(existingUser).State = EntityState.Modified;
+                        using (var transaction = context.Database.BeginTransaction())
+                        {
+                            context.Entry(existingUser).State = EntityState.Modified;
+                            context.SaveChanges();
 
-                        context.SaveChanges();
+                            KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.User thirdPartyUser = new KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.User();
+
+                            thirdPartyUser.UserName = username;                            
+                            if (ThirdPartyDL.UserExists(thirdPartyUser))
+                                ThirdPartyDL.ChangePassword(username, newPassword);
+
+                            transaction.Commit();
+                        }
                     }
 
                     return true;

@@ -22,7 +22,7 @@ namespace KioskSolution.Controllers
                 user.CreatedOn = System.DateTime.Now;
                 user.FirstTime = true;
                 string password = System.Web.Security.Membership.GeneratePassword(8, 0);
-                user.HashedPassword = PasswordHash.MD5Hash(password);
+                user.HashedPassword = password;
 
                 bool result = UserPL.Save(user, out errMsg);
                 if (string.IsNullOrEmpty(errMsg))
@@ -73,7 +73,7 @@ namespace KioskSolution.Controllers
         {
             try
             {
-                string password = PasswordHash.MD5Hash(changePassword.Password);
+                string password = changePassword.Password;
                 string username = changePassword.Username;
                 bool result = UserPL.ChangePassword(username, password);
                 return result.Equals(true) ? Request.CreateResponse(HttpStatusCode.OK, "Successful") : Request.CreateResponse(HttpStatusCode.BadRequest, "Failed");
