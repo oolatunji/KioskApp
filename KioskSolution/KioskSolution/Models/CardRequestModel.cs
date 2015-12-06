@@ -10,6 +10,7 @@ namespace KioskSolution.Models
         public long CustomerID { get; set; }
         public long CardTypeID { get; set; }
         public long PickupBranchID { get; set; }
+        public string Username { get; set; }
         public long RequestTypeID { get; set; }
         public string SerialNumber { get; set; }
     }

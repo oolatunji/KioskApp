@@ -36,7 +36,7 @@ namespace KioskSolutionLibrary.DataLibrary
                 using (var context = new CardIssuanceKIOSKEntities())
                 {
                     existingPanDetail = context.PANDetails
-                                    .Where(t => t.pan.Equals(panDetail.pan))
+                                    .Where(t => t.pan.Equals(panDetail.pan) || t.account_number.Equals(panDetail.account_number))
                                     .FirstOrDefault();
                 }
 
@@ -97,7 +97,25 @@ namespace KioskSolutionLibrary.DataLibrary
                     var panDetails = context.PANDetails
                                             .Where(f => f.pan == pan);
 
-                    return panDetails.FirstOrDefault();
+                    return panDetails != null ? panDetails.FirstOrDefault() : null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static PANDetail RetrievePanDetailByAccountNumber(string accountNumber)
+        {
+            try
+            {
+                using (var context = new CardIssuanceKIOSKEntities())
+                {
+                    var panDetails = context.PANDetails
+                                            .Where(f => f.account_number == accountNumber);
+
+                    return panDetails != null ? panDetails.FirstOrDefault() : null;
                 }
             }
             catch (Exception ex)
@@ -151,15 +169,12 @@ namespace KioskSolutionLibrary.DataLibrary
         {
             try
             {
-                var existingUser = new User();
                 using (var context = new CardIssuanceKIOSKEntities())
                 {
-                    existingUser = context.Users
-                                    .Where(t => t.UserName.Equals(username))
-                                    .FirstOrDefault();
-                }
+                    var existingUser = context.Users.Where(t => t.UserName.Equals(username));
 
-                return existingUser;
+                    return existingUser != null ? existingUser.FirstOrDefault() : null;
+                }
             }
             catch (Exception ex)
             {

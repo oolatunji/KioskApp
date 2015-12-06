@@ -52,6 +52,7 @@ function getBranches() {
 
             "columns": [
                 { "data": "Pan" },
+                { "data": "SerialNumber" },
                 { "data": "Status" }
             ],
 

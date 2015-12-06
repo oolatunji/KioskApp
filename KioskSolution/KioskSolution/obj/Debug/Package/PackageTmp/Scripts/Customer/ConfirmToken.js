@@ -20,28 +20,7 @@
                 $('#cardType').val(cardType);
                 $('#accountNumber').val(accountNumber);
             }
-            $('#pickUpBranch').html('<option>Loading Pick Up Branches...</option>');
-            $('#pickUpBranch').prop('disabled', 'disabled');
-            $.ajax({
-                url: settingsManager.websiteURL + 'api/BranchAPI/RetrieveBranches',
-                type: 'GET',
-                async: true,
-                cache: false,
-                success: function (response) {
-                    $('#pickUpBranch').html('');
-                    $('#pickUpBranch').prop('disabled', false);
-                    $('#pickUpBranch').append('<option value="">Select Branch</option>');
-                    var functions = response.data;
-                    var html = '';
-                    $.each(functions, function (key, value) {
-                        $('#pickUpBranch').append('<option value="' + value.ID + '">' + value.Name + '</option>');
-                    });
-                },
-                error: function (xhr) {
-                    displayMessage("error", 'Error experienced: ' + xhr.responseText);
-                }
-            });
-            displayMessage("success", 'A token has been sent to your email. Kindly enter the token to continue with your card request.');
+            displayMessage("success", "A token has been sent to the customer's email. Kindly request for the token to continue with the card request.");
         } else {
             window.location = '../Customer/CustomerCardRequest';
         }
@@ -51,20 +30,25 @@
 });
 
 function continueRequestCard() {
-    try{
-        if (window.sessionStorage.getItem('customerToken') != null) {
-            var token = $('#token').val();
-            if (_.isEmpty(token)) {
-                displayMessage("error", "Error encountered: Kindly enter the token sent to your mail.");
-            } else {
-                var customerToken = JSON.parse(window.sessionStorage.getItem('customerToken'));
-                var generatedtoken = customerToken.customerToken;
-                if (!_.isEqual(token, generatedtoken)) {
-                    displayMessage("error", "Error encountered: Invalid token entered.");
+    try {
+        if (window.sessionStorage.getItem("loggedInUser") === null) {
+            window.location = '../';
+            alert("Your session has expired. Kindly login again.");
+        } else {
+
+            var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
+            var branchID = user.BranchID;
+            var username = user.Username;
+
+            if (window.sessionStorage.getItem('customerToken') != null) {
+                var token = $('#token').val();
+                if (_.isEmpty(token)) {
+                    displayMessage("error", "Error encountered: Kindly enter the token sent to your mail.");
                 } else {
-                    var branch = $('#pickUpBranch').val();
-                    if (_.isEmpty(branch)) {
-                        displayMessage("error", "Error encountered: Kindy select the branch where you will like to pick up your card.");
+                    var customerToken = JSON.parse(window.sessionStorage.getItem('customerToken'));
+                    var generatedtoken = customerToken.customerToken;
+                    if (!_.isEqual(token, generatedtoken)) {
+                        displayMessage("error", "Error encountered: Invalid token entered.");
                     } else {
                         var requestType = window.sessionStorage.getItem('requestType');
                         var serialNumber = '';
@@ -78,7 +62,7 @@ function continueRequestCard() {
                         $('#addBtn').html('<i class="fa fa-spinner fa-spin"></i> Requesting...');
                         $("#addBtn").attr("disabled", "disabled");
 
-                        var data = { CustomerID: customerID, CardTypeID: cardType, PickupBranchID: branch, RequestTypeID: requestType, SerialNumber: serialNumber };
+                        var data = { CustomerID: customerID, CardTypeID: cardType, RequestTypeID: requestType, SerialNumber: serialNumber, PickupBranchID: branchID, Username: username };
                         $.ajax({
                             url: settingsManager.websiteURL + 'api/CustomerAPI/SaveCustomerCardRequest',
                             type: 'POST',
@@ -87,7 +71,7 @@ function continueRequestCard() {
                             async: true,
                             cache: false,
                             success: function (response) {
-                                displayMessage("success", 'Your card request has been received. You will be informed as soon as your card is ready for pick up.');
+                                displayMessage("success", 'Card Request was successful and ready to be printed.');
 
                                 window.sessionStorage.removeItem('requestType');
                                 window.sessionStorage.removeItem('cardType');
@@ -108,11 +92,11 @@ function continueRequestCard() {
                         });
                     }
                 }
+            } else {
+                window.location = '../Customer/CustomerCardRequest';
             }
-        } else {
-            window.location = '../Customer/CustomerCardRequest';
         }
-    }catch(err){
+    } catch (err) {
         displayMessage("error", "Error encountered: " + err);
         $("#addBtn").removeAttr("disabled");
         $('#addBtn').html('<i class="fa fa-cog"></i> Request');

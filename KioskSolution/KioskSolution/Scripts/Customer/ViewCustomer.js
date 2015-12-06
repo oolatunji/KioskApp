@@ -140,15 +140,15 @@ function format(d) {
     // `d` is the original data object for the row
     return '<form><table width="100%" class="cell-border" cellpadding="5" cellspacing="0" border="2" style="padding-left:50px;">' +
         '<tr>' +
-            '<td style="color:navy;width:20%;font-family:Arial;">Name:</td>' +
+            '<td style="color:navy;width:20%;font-family:Arial;">Lastname:</td>' +
             '<td><input class="form-control" title="Lastname" placeholder="Enter Lastname" id="lastname" value="' + d.Lastname + '" required/></td>' +
         '</tr>' +
         '<tr>' +
-            '<td style="color:navy;width:20%;font-family:Arial;">Code:</td>' +
+            '<td style="color:navy;width:20%;font-family:Arial;">Othernames:</td>' +
             '<td><input class="form-control" title="Othernames" placeholder="Enter Othernames" id="othernames" value="' + d.Othernames + '" required/></td>' +
         '</tr>' +
          '<tr>' +
-            '<td style="color:navy;width:20%;font-family:Arial;">Address:</td>' +
+            '<td style="color:navy;width:20%;font-family:Arial;">Email Address:</td>' +
             '<td><input class="form-control" title="Email Address" placeholder="Enter Email Address" id="emailAddress" value="' + d.EmailAddress + '" required/></td>' +
         '</tr>' +
         '<tr>' +

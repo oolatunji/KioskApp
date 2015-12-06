@@ -1,89 +1,82 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Customer Card Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Card Request | Confirm Token</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/common_libraries")
-    @Scripts.Render("~/bundles/confirmcardrequest")
-</head>
-<body>
+@Scripts.Render("~/bundles/confirmcardrequest")
 
-    <!-- Form area -->
-    <div class="admin-form">
-        <div class="container">
+<div class="page-head">
+    <h2 class="pull-left"><i class="fa fa-credit-card"></i> Card Request Management</h2>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Widget starts -->
-                    <div class="widget worange">
-                        <!-- Widget head -->
-                        <div class="widget-head">
-                            <i class="fa fa-credit-card"></i> Confirm Token
-                        </div>
+    <!-- Breadcrumb -->
+    <div class="bread-crumb pull-right">
+        <a><i class="fa fa-credit-card"></i> Card Request Management</a>
+        <!-- Divider -->
+        <span class="divider">/</span>
+        <a class="bread-current"> Confirm Token</a>
+    </div>
 
-                        <div class="widget-content">
-                            <div class="padd">
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">Request Type</label>
-                                        <div class="col-lg-9">
-                                            <input type="text" class="form-control" id="requestType" readonly>
-                                        </div>
+    <div class="clearfix"></div>
+
+</div>
+<div class="matter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget wgreen">
+                    <div class="widget-head">
+                        <div class="pull-left">Confirm Token</div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="padd">
+                            <br />
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Request Type</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" id="requestType" readonly>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">Card Type</label>
-                                        <div class="col-lg-9">
-                                            <input type="text" class="form-control" id="cardType" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-lg-3" for="username">Account Number</label>
-                                        <div class="col-lg-9">
-                                            <input type="text" class="form-control" id="accountNumber" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group" id="serialNumberBlock">
-                                        <label class="control-label col-lg-3" for="username">Serial Number</label>
-                                        <div class="col-lg-9">
-                                            <input type="text" class="form-control" id="serialNumber" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-lg-3" for="password">Token</label>
-                                        <div class="col-lg-9">
-                                            <input type="number" class="form-control" id="token" placeholder="Enter the token sent to you">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">Pick Up Branch</label>
-                                        <div class="col-lg-9">
-                                            <select class="form-control" id="pickUpBranch" title="User Branch"></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9 col-lg-offset-3">
-                                        <button id="addBtn" onclick="continueRequestCard()" type="submit" class="btn btn-info btn-sm">Request</button>
-                                    </div>
-                                    <br />
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Card Type</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" id="cardType" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-2" for="username">Account Number</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" id="accountNumber" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="serialNumberBlock">
+                                    <label class="control-label col-lg-2" for="username">Serial Number</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" id="serialNumber" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-2" for="password">Token</label>
+                                    <div class="col-lg-5">
+                                        <input type="number" class="form-control" id="token" placeholder="Enter the token sent to you">
+                                    </div>
+                                </div>
+                                <div class="col-lg-offset-2 col-lg-6">
+                                    <button id="addBtn" onclick="continueRequestCard()" type="submit" class="btn btn-info btn-sm">Request</button>
+                                </div>
+                                <br />
                             </div>
                         </div>
-
-                        <div class="widget-foot">
-                            Kindly enter the token sent your email to continue with your card request.<br />
-                            <a href="~/Customer/CustomerCardRequest">Back to Card Request Form</a>
-                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        Kindly enter the token sent to customer's email to continue with the card request.<br />
+                        <a href="~/Customer/CustomerCardRequest">Back to Card Request Form</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+

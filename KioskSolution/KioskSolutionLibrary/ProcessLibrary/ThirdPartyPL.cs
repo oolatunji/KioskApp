@@ -17,7 +17,7 @@ namespace KioskSolutionLibrary.ProcessLibrary
             {
                 if (ThirdPartyDL.PanExists(panDetail))
                 {
-                    message = string.Format("Pan: {0} exists already", panDetail.pan);
+                    message = string.Format("Pan: {0} or Serial Number: {1} exists already", panDetail.pan, panDetail.account_number);
                     return false;
                 }
                 else
@@ -45,6 +45,7 @@ namespace KioskSolutionLibrary.ProcessLibrary
                     Object panDetailObj = new
                     {
                         Pan = panDetail.pan,
+                        SerialNumber = panDetail.account_number,
                         Status = panDetail.Status
                     };
 
@@ -64,6 +65,18 @@ namespace KioskSolutionLibrary.ProcessLibrary
             try
             {
                 return ThirdPartyDL.RetrievePanDetailByPan(pan);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static PANDetail RetrievePanDetailsByAccountNumber(string accountNumber)
+        {
+            try
+            {
+                return ThirdPartyDL.RetrievePanDetailByAccountNumber(accountNumber);
             }
             catch (Exception ex)
             {

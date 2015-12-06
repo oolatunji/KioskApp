@@ -37,11 +37,18 @@ namespace KioskSolutionLibrary.ProcessLibrary
             }
         }
 
-        public static bool SaveCardRequest(CardRequest cardRequest)
+        public static bool SaveCardRequest(CardRequest cardRequest, string username)
         {
             try
             {
-                return CustomerDL.SaveCardRequest(cardRequest);
+                CardRequest savedCardRequest = new CardRequest();
+
+                bool saved = CustomerDL.SaveCardRequest(cardRequest, username, out savedCardRequest);
+                if (saved)
+                {
+                    Mail.SendCardPickup(savedCardRequest);
+                }
+                return saved;
             }
             catch (Exception ex)
             {
@@ -132,9 +139,9 @@ namespace KioskSolutionLibrary.ProcessLibrary
             try
             {
                 dynamic returnedCustomer = new System.Dynamic.ExpandoObject();
-                if (!string.IsNullOrEmpty(serialNumber) && CustomerDL.CustomerCardRequestExists(serialNumber))
+                if (!string.IsNullOrEmpty(serialNumber) && ThirdPartyDL.RetrievePanDetailByAccountNumber(serialNumber) == null)
                 {
-                    throw new Exception(string.Format("Serial Number: {0} is already used. Kindly make use of another.", serialNumber));
+                    throw new Exception(string.Format("Serial Number: {0} is not valid.", serialNumber));
                 }
                 else
                 {

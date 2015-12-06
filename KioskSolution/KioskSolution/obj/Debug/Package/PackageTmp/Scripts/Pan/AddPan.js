@@ -31,9 +31,10 @@ function addPan() {
             $("#addBtn").attr("disabled", "disabled");
 
             var pan = $('#pan').val();
+            var serialNumber = $('#serialNumber').val();
             var status = 0;
 
-            var data = { pan: pan, Status: status };
+            var data = { pan: pan, Status: status, account_number: serialNumber };
             $.ajax({
                 url: settingsManager.websiteURL + 'api/ThirdPartyAPI/SavePan',
                 type: 'POST',
@@ -44,7 +45,8 @@ function addPan() {
                 success: function (response) {
                     displayMessage("success", response);
                     $('#pan').val('');
-                    
+                    $('#serialNumber').val('');
+
                     $("#addBtn").removeAttr("disabled");
                     $('#addBtn').html('<i class="fa fa-cog"></i> Add');
                 },

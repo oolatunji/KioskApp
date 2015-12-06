@@ -120,11 +120,13 @@ namespace KioskSolution.Controllers
                 cardRequest.CardType = Enum.GetName(typeof(StatusUtil.CardType), cardRequestModel.CardTypeID);
                 cardRequest.RequestType = Enum.GetName(typeof(StatusUtil.RequestType), cardRequestModel.RequestTypeID);
                 cardRequest.PickupBranchID = cardRequestModel.PickupBranchID;
-                cardRequest.Status = StatusUtil.CardStatus.Requested.ToString();
+                cardRequest.Status = StatusUtil.CardStatus.Approved.ToString();
                 cardRequest.ModifiedDate = System.DateTime.Now;
                 cardRequest.SerialNumber = cardRequestModel.SerialNumber;
 
-                bool result = CustomerPL.SaveCardRequest(cardRequest);
+                string username = cardRequestModel.Username;
+
+                bool result = CustomerPL.SaveCardRequest(cardRequest, username);
 
                 return result.Equals(true) ? Request.CreateResponse(HttpStatusCode.OK, "Successful") : Request.CreateResponse(HttpStatusCode.BadRequest, "Request failed");
             }

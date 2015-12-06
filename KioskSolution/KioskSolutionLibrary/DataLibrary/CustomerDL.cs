@@ -33,15 +33,53 @@ namespace KioskSolutionLibrary.DataLibrary
             }
         }
 
-        public static bool SaveCardRequest(CardRequest cardRequest)
+        public static bool SaveCardRequest(CardRequest cardRequest, string loggedInUsername, out CardRequest savedCardRequest)
         {
             try
             {
                 using (var context = new KioskWebDBEntities())
                 {
-                    context.CardRequests.Add(cardRequest);
-                    context.SaveChanges();
+                    using (var transaction = context.Database.BeginTransaction())
+                    {
+                        context.CardRequests.Add(cardRequest);
+                        context.SaveChanges();
+
+                        KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.User thirdPartyUser = ThirdPartyDL.RetrieveUserByUsername(loggedInUsername);
+
+                        Customer cardRequestCustomer = RetrieveCustomerByID(cardRequest.CustomerID);
+
+                        KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.CardAccountRequest car = new ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.CardAccountRequest();
+
+                        car.NameOnCard = string.Format("{0} {1}", cardRequestCustomer.Lastname, cardRequestCustomer.Othernames);
+
+                        if (cardRequest.RequestType == StatusUtil.RequestType.WithSerialNumber.ToString())
+                        {
+                            KioskSolutionLibrary.ModelLibrary.EntityFrameworkLibrary.ThirdPartyData.PANDetail panDetail = ThirdPartyDL.RetrievePanDetailByAccountNumber(cardRequest.SerialNumber);
+
+                            car.PAN = panDetail.pan;
+
+                            ThirdPartyDL.UpdatePan(panDetail.pan);
+                        }
+
+                        car.PrintStatus = 1;
+                        car.UserPrinting = thirdPartyUser.id.ToString();
+                        car.DATE = System.DateTime.Now;
+                        if (cardRequest.RequestType == StatusUtil.RequestType.WithSerialNumber.ToString())
+                            car.HolderIDNumber = cardRequest.SerialNumber;
+                        car.PhoneNumber = cardRequestCustomer.PhoneNumber;
+                        car.LastName = cardRequestCustomer.Lastname;
+                        car.OtherName = cardRequestCustomer.Othernames;
+                        car.emailaddress = cardRequestCustomer.EmailAddress;
+                        car.Updateddate = System.DateTime.Now;
+                        ThirdPartyDL.SaveCar(car);
+
+                        cardRequest.Customer = cardRequestCustomer;
+
+                        transaction.Commit();
+                    }
                 }
+                cardRequest.Branch = BranchDL.RetrieveBranchByID(cardRequest.PickupBranchID);
+                savedCardRequest = cardRequest;
                 return true;
             }
             catch (Exception ex)
