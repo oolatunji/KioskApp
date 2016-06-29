@@ -1,22 +1,6 @@
 ﻿$(document).ready(function () {
     try {
-        var currentUrl = window.location.href;
-        var user = JSON.parse(window.sessionStorage.getItem("loggedInUser"));
-        var userFunctions = user.Function;
-
-        var exist = false;
-        $.each(userFunctions, function (key, userfunction) {
-            var link = settingsManager.websiteURL.trimRight('/') + userfunction.PageLink;
-            if (currentUrl == link) {
-                exist = true;
-            }
-        });
-
-        if (!exist)
-            window.location.href = '../System/UnAuthorized';
-        else
-            showPage();
-
+        showPage();
     } catch (err) {
         displayMessage("error", "Error encountered: " + err);
     }
